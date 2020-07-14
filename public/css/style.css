@@ -1,0 +1,509 @@
+/* ============================== RESET ============================== */
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+/* ============================== GENERAL ============================== */
+
+section {
+    margin: 0 auto;
+    padding: 40px 0px;
+    text-align: center;
+}
+
+a, a:hover {
+    text-decoration: none;
+    text-align: center;
+}
+
+li {
+    list-style-type: none;
+}
+
+.button{
+    display: block;
+    width: 150px;
+    margin: 0 auto;
+    padding: 10px 0px;
+	/* text-shadow: 1px 1px 1px #000; */
+	text-align: center;
+	color: #d82c2e;
+	border-radius: 5px;
+	/* background-color: #444; */
+	border: 2px solid #d82c2e;
+}
+
+.button:hover{
+    color: #fff;
+	background-color: #d82c2e;
+	border : 2px solid #333;
+}
+
+.avatar {
+    width: 2rem;
+    border-radius: 50%;
+}
+
+.mask {
+    display: none !important;
+}
+
+
+
+
+
+/* ============================== NAVBAR ============================== */
+
+.navbar{
+	background-color:rgba(255, 255, 255, 0.9);
+	font-size: 12px;  /*  rem ou em     */
+	letter-spacing: 4px;
+	text-transform: uppercase;
+	font-weight: bold;
+	border-bottom: 1px solid #fff;
+	width: 100%;
+}
+
+.nav-link, .nav-link a{
+	color: #d82c2e !important;
+	text-align: center;
+}
+
+.nav-link:hover, .nav-pills .show>.nav-link {
+	color: #fff !important;
+    background-color: #d82c2e !important;
+}
+
+.navbar-brand {
+    color: #d82c2e;
+}
+
+.navbar-brand:hover {
+    background-color: #fff;
+    box-shadow: 0px 0px 3px black;
+}
+
+.navbar-brand span {
+    display: inline-block;
+}
+
+.navbar-brand:hover span{
+    background-color: #d82c2e;
+    border-radius: 50%;
+    width: 40%;
+    color: transparent;
+}
+
+.navbar-toggler{
+	color: #d82c2e !important;
+	border-style: none;
+}
+
+.dropdown-menu a {
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+}
+
+.dropdown-item:nth-last-child(2) {
+    border-top : 1px solid #000;
+}
+
+.dropdown-item:hover {
+    background: #d82c2e;
+    color: white !important;
+    text-align: left;
+}
+
+.animated-icon {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    margin: 0px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+    
+.animated-icon span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+}
+    
+.animated-icon span {
+    background: #d82c2e;
+}
+    
+.animated-icon span:nth-child(1) {
+    top: 0px;
+}
+    
+.animated-icon span:nth-child(2) {
+    top: 10px;
+}
+    
+.animated-icon span:nth-child(3) {
+    top: 20px;
+}
+    
+.animated-icon.open span:nth-child(1) {
+    top: 11px;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+    
+.animated-icon.open span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+}
+    
+.animated-icon.open span:nth-child(3) {
+    top: 11px;
+    -webkit-transform: rotate(-135deg);
+    -moz-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+}
+
+/* #navbarDropdown img {
+    width: 2rem;
+    border-radius: 50%;
+} */
+
+
+
+
+
+
+/* ============================== CAROUSEL ============================== */
+
+
+
+
+
+
+
+/* ============================== ABOUT US ============================== */
+
+#aboutUs img {
+    width: 400px;
+}
+
+#aboutUs h1 {
+    margin: 20px 0px;
+}
+
+.title-japon {
+    font-weight: bold;
+    font-style: oblique;
+}
+
+.title-point {
+    display: inline-block;
+    background-color: #d82c2e;
+    margin-left: 0.125em;
+    width: 0.375em;
+    height: 0.375em;
+    border-radius: 50%;
+}
+
+#aboutUs p {
+    text-align: left;
+}
+
+
+
+
+
+/* ============================== IDEAS ============================== */
+
+
+/* ====== IDEAS INDEX ====== */
+
+#ideasMenu img, #articlesMenu img, .ideasDashBoard img, .articlesDashBoard img {
+    margin-bottom: 10px;
+    width: 300px;
+    height: 175px;
+    border-radius: 5px;
+    border: solid 10px #fff;
+    box-shadow: 0px 0px 2px #333, 0px 3px 3px #333;
+}
+
+#ideasMenu .col-lg-4, .ideasDashBoard .col-xl-4 {
+    margin: 20px 0px;
+}
+
+
+/* ====== IDEA SHOW ====== */
+
+.idea img {
+    width: 70%;
+}
+
+/* .idea p {
+    width: 85%;
+    margin: 0 auto;
+} */
+
+.main-card {
+    text-align: left;
+    display: block;
+    padding: 1rem;
+}
+
+.main-card h4, .card a, .card-comment, .user-comment {
+    margin-bottom: 1rem
+}
+
+.main-card h4 {
+    text-align: center;
+    font-weight: bold;
+}
+
+.card a{
+    display: inline-block;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    border-radius: 5px;
+	color: #d82c2e;
+    text-align: center;
+}
+
+.card a:hover {
+	color: #fff;
+    background-color: #d82c2e;
+}
+
+.user-comment {
+    text-align: left;
+}
+
+.user-note{
+    margin-left: 1rem;
+}
+
+
+
+
+
+
+/* ============================== ARTICLES ============================== */
+
+#articlesMenu {
+    text-align: left;
+}
+
+#articlesMenu h2 {
+    text-align: center;
+}
+
+.article-trailer {
+    margin: 20px 0px;
+    padding-bottom: 20px;
+    border-bottom: solid 1px #000;
+}
+
+.article-trailer:last-child {
+    border: none;
+}
+
+
+
+
+
+
+
+
+/* ============================== TRAVELS ============================== */
+
+#travelsMenu img, .travelsDashBoard img {
+    width: 400px;
+    height: 250px;
+    border-radius: 5px;
+}
+.cat-bubble-container {
+    margin: 25px auto;
+    width: 400px;
+    height: 250px;
+}
+
+.cat-bubble-container .cat-bubble {
+    position: relative;
+    display: block;
+    bottom: 150px;
+    color: #fff;
+    opacity: 0.9;
+    font-size: 2.5rem;
+}
+
+.cat-bubble-container:hover .cat-bubble {
+    color: red;
+}
+
+.cat-bubble-container:hover img {
+    opacity: 0.5;
+}
+
+
+
+
+
+
+/* ============================== CATEGORIES ============================== */
+
+.travels-category {
+    text-align : left;
+    border-bottom: 1px solid #000;
+    margin : 50px auto;
+}
+
+
+
+
+
+
+/* ============================== USERS ============================== */
+
+
+/* ====== COMMENTS ====== */
+
+.commentShowBox {
+    display: flex;
+}
+
+.commentShow {
+    margin-left: 1rem;
+}
+
+.avatarShow {
+    width: 150px;
+}
+
+
+/* ====== COMMANDS ====== */
+
+
+
+
+
+
+
+/* ============================== ADMIN ============================== */
+
+
+/* ====== DASHBOARD ====== */
+
+.travelsDashBoard, .ideasDashBoard, .articlesDashBoard {
+    margin: 50px auto;
+    width: 80%;
+    text-align: center;
+}
+
+.travelDashBoardInfo {
+    border-bottom: 1px solid #000;
+}
+
+.articlesDashBoard {
+    margin: 10rem auto;
+}
+
+
+
+/* ====== MODERATION ====== */
+
+.usersInfo {
+    display: flex;
+}
+
+.usersBand {
+    margin: 30px 0 30px -15px;
+    padding: 15px;
+    width: 20%;
+    background-color: #d82c2e;
+    border-radius: 0 10px 10px 0;
+}
+
+.usersBand img {
+    margin: 0.5rem 0;
+}
+
+.userBandActive, .userBand:hover {
+    margin: 0 -15px;
+    padding-left: 15px;
+    background-color: #fff;
+    color: #d82c2e;
+    cursor: pointer;
+}
+
+.usersBandInfo {
+    margin: 30px 0;
+    padding-top: 2rem;
+    width: 80%;
+}
+
+.btnBanUpdate {
+    background-color: #fff;
+    padding: 0;
+    width: 6rem;
+}
+
+/* .userBandInfo {
+    margin : 0 15px;
+} */
+
+
+
+
+
+/* ============================== FOOTER ============================== */
+
+footer{
+	background-color: #fff;
+	padding: 20px 0 40px 0;
+    text-align: center;
+    border-top: solid 1px #000;
+}
+
+footer a{
+	font-size: 25px;  /*  rem ou em */
+	margin-bottom: 10px;
+	color: #d82c2e;
+	height: 30px;
+}
+
+footer a:hover{
+	font-size: 30px;  /*  rem ou em */
+	color: #d82c2e;
+}
+
+footer h3{
+	color: #000;
+	font-weight: normal;
+	font-size: 20px;  /* rem ou em */
+}
