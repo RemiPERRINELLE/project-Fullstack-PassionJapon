@@ -59,8 +59,8 @@ $(document).ready(function () {
 
     // ========== USER BAN UPDATE ==========
     $('.onoffswitch-checkbox').click( function() {
-      // $('.btnBanUpdate').removeClass('mask');
-      var userId = $(this).attr('id').substr(-1);
+      $('.btnBanUpdate').removeClass('mask');
+      var userId = $(this).attr('id').substr(13);
       if($('#banInput' + userId).val() == 0) {
         $('#banInput' + userId).val('1');
       } else {
@@ -69,10 +69,10 @@ $(document).ready(function () {
       $('#btnBanUpdate' + userId).removeClass('mask');
     });
 
-    // $('.btnUpdateForm').submit( function(e){
-    //   e.preventDefault();
-    //   alert("C'est fait");
-    // });
+    //$('.btnUpdateForm').submit( function(e){
+      //e.preventDefault();
+      //alert("C'est fait");
+    //});
 
 
 

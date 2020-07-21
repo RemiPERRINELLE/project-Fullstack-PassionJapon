@@ -37,30 +37,17 @@ class AdminController extends Controller
      * @param $myonoff
      * @return \Illuminate\Http\Response
      */
-    public function banUpdate($id, $myonoff)
+    public function banUpdate(User $user)
     {        
-        $user = User::find($id);
-        if( $user->ban == 1 ){
-            $user->update([
-                'ban' => 0
-            ]);
-            if( $user->role == 0 ){
-                return back()->with('info', "L'utilisateur " . $user->pseudo . " n'est plus banni");
-                // return back()->with('info', 'L\'article a bien été supprimé');
-            } else {
-                return back()->with('info', "L'administrateur " . $user->pseudo . " n'est plus banni");
-                // return back()->with('info', 'L\'article a bien été supprimé');
-            }
+        $user->update([
+            'ban' => $_POST['banInput'.$user->id],
+        ]);
+        if( $user->ban == 1 ) {
+            return back()->with('info', 'L\'utilisateur '.$user->pseudo.' est désormais banni');
         } else {
-            $user->update([
-                'ban' => 1
-            ]);
-            if( $user->role == 0 ){
-                return back()->with('info', "L'utilisateur " . $user->pseudo . " est désormais banni");
-            } else {
-                return back()->with('info', "L'administrateur " . $user->pseudo . " est désormais banni");
-            }
+            return back()->with('info', 'L\'utilisateur '.$user->pseudo.' n\'est plus banni');
         }
+        
     }
 
     /**
