@@ -18,4 +18,9 @@ class Travel extends Model
     { 
         return $this->hasMany(Reaction::class); 
     }
+
+    public function users() 
+    { 
+        return $this->belongsToMany(User::class); 
+    }
 }

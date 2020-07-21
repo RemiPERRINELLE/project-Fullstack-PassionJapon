@@ -44,6 +44,11 @@ class User extends Authenticatable
 
     public function media() 
     { 
-        return $this->hasMany(Media::class); 
+        return $this->belongsToMany(Media::class); 
+    }
+
+    public function travels() 
+    { 
+        return $this->belongsToMany(Travel::class); 
     }
 }
