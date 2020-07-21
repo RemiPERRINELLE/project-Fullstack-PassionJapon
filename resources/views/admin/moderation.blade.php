@@ -49,6 +49,7 @@
                                     <form method="POST" action="{{ route('banUpdate', $user->id) }}">
                                         @csrf
                                         @method('PUT')
+                                        <input id="banInput{{$user->id}}" name="banInput{{$user->id}}" class="d-none" type="text" value={{ old('ban', $user->ban) }}>
                                         <button id="btnBanUpdate{{ $user->id }}" class="button btnBanUpdate mask" type="submit">Confirmer</button>
                                     </form>
                                 </div>
