@@ -25,7 +25,7 @@ class Users extends FormRequest
     {
         return [
             'pseudo' => ['required', 'string', 'max:255'],
-            'avatar' => ['required', 'image', 'max:2000'],
+            'avatar' => ['image', 'max:2000'],
             'name' => ['required', 'string', 'max:255'],
             'firstname' => ['required', 'string', 'max:255'],
             'sexe' => ['required', 'string', 'max:2'],

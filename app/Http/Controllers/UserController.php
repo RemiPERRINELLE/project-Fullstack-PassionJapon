@@ -55,27 +55,32 @@ class UserController extends Controller
      */
     public function update(UsersRequest $usersRequest, User $user)
     {
-        //return redirect()->route('profile')->with('info', 'route prise');
-        $avatar = $usersRequest->avatar;
-        $avatarName = $avatar->getClientOriginalName();
-        if( file_exists('uploads/users/' . $user->id . '/' . $avatarName) ) {
-            return back()->with('image-error', "Ce nom d'image existe déjà");
-        } else {
-            $avatar->move('uploads/users/' . $user->id, $avatarName);
-            $user->update([
-                'pseudo' => $usersRequest->pseudo,
-                'avatar' => $avatarName,
-                'name' => $usersRequest->name,
-                'firstname' => $usersRequest->firstname,
-                'sexe' => $usersRequest->sexe,
-                'adress' => $usersRequest->adress,
-                'postal_code' => $usersRequest->postal_code,
-                'city' => $usersRequest->city,
-                'country' => $usersRequest->country,
-                'phone' => $usersRequest->phone,
-            ]);
-            return redirect()->route('profile')->with('info', 'Votre profil a bien été modifié');
+        $user->update([
+            'pseudo' => $usersRequest->pseudo,
+            'name' => $usersRequest->name,
+            'firstname' => $usersRequest->firstname,
+            'sexe' => $usersRequest->sexe,
+            'adress' => $usersRequest->adress,
+            'postal_code' => $usersRequest->postal_code,
+            'city' => $usersRequest->city,
+            'country' => $usersRequest->country,
+            'phone' => $usersRequest->phone,
+        ]);
+
+        if( $usersRequest->avatar ) {
+            $avatar = $usersRequest->avatar;
+            $avatarName = $avatar->getClientOriginalName();
+            if( file_exists('uploads/users/' . $user->id . '/' . $avatarName) ) {
+                return back()->with('image-error', "Ce nom d'image existe déjà");
+            } else {
+                $avatar->move('uploads/users/' . $user->id, $avatarName);
+                $user->update([
+                    'avatar' => $avatarName
+                ]);
+            }
         }
+
+        return redirect()->route('profile')->with('info', 'Votre profil a bien été modifié');
     }
 
     /**
@@ -98,9 +103,9 @@ class UserController extends Controller
      */
     public function updatePassword(User $user)
     {
-        return redirect()->route('profile')->with('info', 'route prise');
+        // return redirect()->route('profile')->with('info', 'route prise');
         // $user->update([
-        //     'password' => Hash::make($user->password),
+        //     'password' => $user->password,
         // ]);
         // return redirect()->route('profile')->with('info', 'Votre mot de passe a bien été modifié');
     }
