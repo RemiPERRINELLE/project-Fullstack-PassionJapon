@@ -51,4 +51,9 @@ class User extends Authenticatable
     { 
         return $this->belongsToMany(Travel::class); 
     }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
 }

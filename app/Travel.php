@@ -23,4 +23,9 @@ class Travel extends Model
     { 
         return $this->belongsToMany(User::class); 
     }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
 }

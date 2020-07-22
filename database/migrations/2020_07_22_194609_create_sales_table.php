@@ -16,7 +16,6 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('numberPlaces');
-            $table->dateTime('datePurchase');
             $table->unsignedBigInteger('travel_id');
             $table->foreign('travel_id')
                   ->references('id')

@@ -76,6 +76,13 @@ $(document).ready(function () {
 
 
 
+    // ========== COMMANDS ==========
+    $('#commandButton').click( function() {
+      $('#commandForm').removeClass('mask');
+    });
+
+
+
 
 
 

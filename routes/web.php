@@ -55,15 +55,19 @@ Route::resource('media', 'MediaController');
 
 Route::resource('users', 'UserController');
 Route::get('user/profile', 'UserController@profile')->name('profile');
-Route::get('user/password/{user}/editPassword', 'UserController@editPassword')->name('edit.password');
-Route::put('user/password/{user}/update', 'UserController@ua')->name('update.password');
-
 Route::get('user/comments', 'UserController@comments')->name('comments');
-Route::get('user/commands', 'UserController@commands')->name('commands');
+Route::get('user/password/{user}/editPassword', 'UserController@editPassword')->name('edit.password');
+Route::put('user/password/{user}/update', 'UserController@updatePassword')->name('update.password');
+
 
 Route::get('admin/moderation', 'AdminController@moderation')->name('moderation');
 Route::get('admin/dashboard', 'AdminController@dashboard')->name('dashboard');
-Route::put('admin/moderation/{id}', 'AdminController@banUpdate')->name('banUpdate');
+Route::put('admin/moderation/{user}', 'AdminController@banUpdate')->name('banUpdate');
+
+
+Route::resource('sales', 'SaleController');
+
+
 
 Route::get('category/travels', 'TravelController@index')->name('travels.category');
 

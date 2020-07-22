@@ -64,7 +64,7 @@
                                 
                                 <a class="dropdown-item" href="{{ route('profile') }}">Profil</a>
                                 <a class="dropdown-item" href="{{ route('comments') }}">Commentaires</a>
-                                <a class="dropdown-item" href="{{ route('commands') }}">Commandes</a>
+                                <a class="dropdown-item" href="{{ route('sales.index') }}">Commandes</a>
                                 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
