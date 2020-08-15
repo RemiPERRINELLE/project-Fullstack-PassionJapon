@@ -11,35 +11,16 @@
 |
 */
 
+use App\Ideas;
+
+
 Route::get('/', function () {
-    // return view('welcomeLaravel');
+    $idea = Ideas::find(1);
+    $idea->with('media')->get();
     return view('home');
 })->name('home');
 
-// Route::get('/home', 'HomeController@index')->name('homeLaravel');
-
-
-
-// Route::get('/user/profile', function () {
-//     return view('user/profile');
-// })->name('profile');
-
-// Route::get('/user/comments', function () {
-//     return view('user/comments');
-// })->name('comments');
-
-// Route::get('/user/commands', function () {
-//     return view('user/commands');
-// })->name('commands');
-
-
-
-
-
-
 Auth::routes();
-
-
 
 Route::resource('articles', 'ArticlesController');
 
@@ -56,23 +37,12 @@ Route::resource('media', 'MediaController');
 Route::resource('users', 'UserController');
 Route::get('user/profile', 'UserController@profile')->name('profile');
 Route::get('user/comments', 'UserController@comments')->name('comments');
+Route::get('user/commands', 'UserController@commands')->name('commands');
 Route::get('user/password/{user}/editPassword', 'UserController@editPassword')->name('edit.password');
 Route::put('user/password/{user}/update', 'UserController@updatePassword')->name('update.password');
-
 
 Route::get('admin/moderation', 'AdminController@moderation')->name('moderation');
 Route::get('admin/dashboard', 'AdminController@dashboard')->name('dashboard');
 Route::put('admin/moderation/{user}', 'AdminController@banUpdate')->name('banUpdate');
 
-
 Route::resource('sales', 'SaleController');
-
-
-
-Route::get('category/travels', 'TravelController@index')->name('travels.category');
-
-Route::get('user/reactions', 'ReactionController@index')->name('reactions.user');
-
-Route::get('idea/reactions', 'ReactionController@index')->name('reactions.idea');
-
-Route::get('travel/reactions', 'ReactionController@index')->name('reactions.travel');

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{User, Reaction, Ideas, Travel, Category};
+use App\{User, Reaction, Ideas, Travel, Category, Sale};
 use App\Http\Requests\Users as UsersRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class UserController extends Controller
@@ -55,32 +57,32 @@ class UserController extends Controller
      */
     public function update(UsersRequest $usersRequest, User $user)
     {
-        $user->update([
-            'pseudo' => $usersRequest->pseudo,
-            'name' => $usersRequest->name,
-            'firstname' => $usersRequest->firstname,
-            'sexe' => $usersRequest->sexe,
-            'adress' => $usersRequest->adress,
-            'postal_code' => $usersRequest->postal_code,
-            'city' => $usersRequest->city,
-            'country' => $usersRequest->country,
-            'phone' => $usersRequest->phone,
-        ]);
-
-        if( $usersRequest->avatar ) {
-            $avatar = $usersRequest->avatar;
-            $avatarName = $avatar->getClientOriginalName();
-            if( file_exists('uploads/users/' . $user->id . '/' . $avatarName) ) {
-                return back()->with('image-error', "Ce nom d'image existe déjà");
-            } else {
-                $avatar->move('uploads/users/' . $user->id, $avatarName);
-                $user->update([
-                    'avatar' => $avatarName
-                ]);
+            $user->update([
+                'pseudo' => $usersRequest->pseudo,
+                'name' => $usersRequest->name,
+                'firstname' => $usersRequest->firstname,
+                'sexe' => $usersRequest->sexe,
+                'adress' => $usersRequest->adress,
+                'postal_code' => $usersRequest->postal_code,
+                'city' => $usersRequest->city,
+                'country' => $usersRequest->country,
+                'phone' => $usersRequest->phone,
+            ]);
+    
+            if( $usersRequest->avatar ) {
+                $avatar = $usersRequest->avatar;
+                $avatarName = $avatar->getClientOriginalName();
+                if( file_exists('uploads/users/' . $user->id . '/' . $avatarName) ) {
+                    return back()->with('image-error', "Ce nom d'image existe déjà");
+                } else {
+                    $avatar->move('uploads/users/' . $user->id, $avatarName);
+                    $user->update([
+                        'avatar' => $avatarName
+                    ]);
+                }
             }
-        }
-
-        return redirect()->route('profile')->with('info', 'Votre profil a bien été modifié');
+    
+            return redirect()->route('profile')->with('info', 'Votre profil a bien été modifié');        
     }
 
     /**
@@ -101,13 +103,52 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updatePassword(User $user)
+    public function updatePassword(Request $request, User $user)
     {
-        // return redirect()->route('profile')->with('info', 'route prise');
-        // $user->update([
-        //     'password' => $user->password,
-        // ]);
-        // return redirect()->route('profile')->with('info', 'Votre mot de passe a bien été modifié');
+
+//         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+//             // The passwords matches
+//             return redirect()->back()->with("currentPassword-error","Your current password does not matches with the password you provided. Please try again.");
+//         }
+
+//         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+//             //Current password and new password are same
+//             return redirect()->back()->with("newPassword-error","New Password cannot be same as your current password. Please choose a different password.");
+//         }
+
+//         $validatedData = $request->validate([
+//             'current-password' => 'required',
+//             'new-password' => 'required|string|min:6|confirmed',
+//         ]);
+// dd('ok');
+//         //Change Password
+//         $user = Auth::user();
+//         $user->password = bcrypt($request->get('new-password'));
+//         $user->save();
+
+//         return redirect()->back()->with("success","Password changed successfully !");
+
+
+        if (!(Hash::check($request->currentPassword, Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with("currentPassword-error","Votre mot de passe actuel ne correspond pas.");
+        }
+
+        if(strcmp($request->currentPassword, $request->newPassword) == 0){
+            //Current password and new password are same
+            return redirect()->back()->with("newPassword-error","Le nouveau mot de passe ne peut être identique à l'ancien.");
+        }
+
+        $validatedData = $request->validate([
+            'newPassword' => 'required|string|min:8|confirmed',
+        ]);
+
+        //Change Password
+        $user->update([
+            'password' => bcrypt($request->newPassword)
+        ]);
+
+        return redirect()->route('profile')->with('info', 'Votre mot de passe a bien été modifié');
     }
 
     /**
@@ -139,8 +180,18 @@ class UserController extends Controller
     {
         $reactions = Reaction::where('reactions.user_id', Auth::user()->id)->get();
         $ideas = Reaction::where('reactions.user_id', Auth::user()->id)->join('ideas', 'reactions.idea_id', '=', 'ideas.id')->get();
-        $travels = Reaction::where('reactions.user_id', Auth::user()->id)->join('travels', 'reactions.travel_id', '=', 'travels.id')->join('categories', 'travels.category_id', '=', 'categories.id')->get();
+        $travels = Reaction::select('travels.id', 'date_start', 'title')->where('reactions.user_id', Auth::user()->id)->join('travels', 'reactions.travel_id', '=', 'travels.id')->join('categories', 'travels.category_id', '=', 'categories.id')->get();
         return view('user/comments', compact('reactions', 'ideas', 'travels'));
+    }
+
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function commands()
+    {
+        $sales = Sale::where('sales.user_id', Auth::user()->id)->get();
+        $travels = Sale::where('sales.user_id', Auth::user()->id)->join('travels', 'sales.travel_id', '=', 'travels.id')->join('categories', 'travels.category_id', '=', 'categories.id')->get();
+        return view('user/commands', compact('sales', 'travels'));
     }
 
 }

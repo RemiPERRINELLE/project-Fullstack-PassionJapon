@@ -9,7 +9,7 @@
 
     <section class="comments">
         <div class="card main-card">
-            <h4>Vos Commentaires</h4>
+            <h2>Vos Commentaires</h2>
             @foreach( $reactions as $reaction )
                         <div class="card card-comment">
                             <div class="card-body">
@@ -19,30 +19,31 @@
                                     @endphp
                                     @foreach( $ideas as $idea)
                                         @if( $reaction->idea_id == $idea->id && $i < 1)
-                                            <p>Concernant l'idée {{ $idea->title }}</p>
-                                            @php
-                                                $i++;
-                                            @endphp
-                                        @endif
-                                    @endforeach                                    
-                                @elseif( $reaction->travel_id )
-                                    @php
-                                        $i=0;
-                                    @endphp
-                                    @foreach( $travels as $travel)
-                                        @if( $reaction->travel_id == $travel->id && $i < 1 )
-                                            <p>Concernant le voyage {{ $travel->title }} du {{ $travel->date_start }}</p>
+                                            <p class="commentSubject">Idée : {{ $idea->title }}</p>
                                             @php
                                                 $i++;
                                             @endphp
                                         @endif
                                     @endforeach
+                                @elseif( $reaction->travel_id )
+                                    @php
+                                        $j=0;
+                                    @endphp
+                                    @foreach( $travels as $travel)
+                                        @if( $reaction->travel_id == $travel->id && $j < 1 )
+                                            <p class="commentSubject">Voyage : {{ $travel->title }} du {{ $travel->date_start }}</p>
+                                            @php
+                                                $j++;
+                                            @endphp
+                                        @endif
+                                    @endforeach
+                                    
                                 @endif
-                                <p>Note : {{ $reaction->note }} / 5</p>
-                                <div class="commentShowBox">
-                                    <span>Commentaire : </span>
-                                    <div class="commentShow">{!! lineBreak($reaction->comment) !!}</div>
+                                <div class="noteBox">
+                                    <p>{{ $reaction->note }} / 5</p>
                                 </div>
+                                <p class="card-text">{!! lineBreak($reaction->comment) !!}</p>
+							    <p>{{ fullDateFormat($reaction->created_at) }}</p>
                                 <a class="button" href="{{ route('reactions.edit', $reaction->id) }}">Modifier</a>
                             </div>
                         </div>

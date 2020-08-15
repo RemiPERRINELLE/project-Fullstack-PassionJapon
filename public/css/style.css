@@ -1,3 +1,11 @@
+/*
+FONTS
+font-family: 'Calligraffitti', cursive;
+font-family: 'Merienda', cursive;
+font-family: 'Sawarabi Mincho', sans-serif;
+*/
+
+
 /* ============================== RESET ============================== */
 
 html, body {
@@ -17,6 +25,17 @@ section {
     text-align: center;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merienda', cursive;
+}
+
+h1, h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
 a, a:hover {
     text-decoration: none;
     text-align: center;
@@ -31,22 +50,22 @@ li {
     width: 150px;
     margin: 0 auto;
     padding: 10px 0px;
-	/* text-shadow: 1px 1px 1px #000; */
 	text-align: center;
-	color: #d82c2e;
+	color: #bd0029;
 	border-radius: 5px;
-	/* background-color: #444; */
-	border: 2px solid #d82c2e;
+	background-color: #fff;
+	border: 2px solid #bd0029;
 }
 
 .button:hover{
     color: #fff;
-	background-color: #d82c2e;
+	background-color: #bd0029;
 	border : 2px solid #333;
 }
 
 .avatar {
     width: 2rem;
+    height: 2rem;
     border-radius: 50%;
 }
 
@@ -71,17 +90,17 @@ li {
 }
 
 .nav-link, .nav-link a{
-	color: #d82c2e !important;
+	color: #bd0029 !important;
 	text-align: center;
 }
 
 .nav-link:hover, .nav-pills .show>.nav-link {
 	color: #fff !important;
-    background-color: #d82c2e !important;
+    background-color: #bd0029 !important;
 }
 
 .navbar-brand {
-    color: #d82c2e;
+    color: #bd0029;
 }
 
 .navbar-brand:hover {
@@ -94,14 +113,14 @@ li {
 }
 
 .navbar-brand:hover span{
-    background-color: #d82c2e;
+    background-color: #bd0029;
     border-radius: 50%;
     width: 40%;
     color: transparent;
 }
 
 .navbar-toggler{
-	color: #d82c2e !important;
+	color: #bd0029 !important;
 	border-style: none;
 }
 
@@ -115,7 +134,7 @@ li {
 }
 
 .dropdown-item:hover {
-    background: #d82c2e;
+    background: #bd0029;
     color: white !important;
     text-align: left;
 }
@@ -155,7 +174,7 @@ li {
 }
     
 .animated-icon span {
-    background: #d82c2e;
+    background: #bd0029;
 }
     
 .animated-icon span:nth-child(1) {
@@ -203,7 +222,9 @@ li {
 
 /* ============================== CAROUSEL ============================== */
 
-
+.carousel-item img {
+    height: 400px;
+}
 
 
 
@@ -213,10 +234,7 @@ li {
 
 #aboutUs img {
     width: 400px;
-}
-
-#aboutUs h1 {
-    margin: 20px 0px;
+    margin-bottom: 3rem;
 }
 
 .title-japon {
@@ -226,7 +244,7 @@ li {
 
 .title-point {
     display: inline-block;
-    background-color: #d82c2e;
+    background-color: #bd0029;
     margin-left: 0.125em;
     width: 0.375em;
     height: 0.375em;
@@ -262,14 +280,19 @@ li {
 
 /* ====== IDEA SHOW ====== */
 
-.idea img {
-    width: 70%;
+.idea img, .article img {
+    margin-bottom: 10px;
+    width: 50%;
+    border-radius: 5px;
+    border: solid 10px #fff;
+    box-shadow: 0px 0px 2px #333, 0px 3px 3px #333;
 }
 
-/* .idea p {
+.idea p, .article p {
     width: 85%;
     margin: 0 auto;
-} */
+    text-align: left;
+}
 
 .main-card {
     text-align: left;
@@ -286,18 +309,18 @@ li {
     font-weight: bold;
 }
 
-.card a{
+.card a, .card button{
     display: inline-block;
     padding: 0.5rem;
     margin-right: 1rem;
     border-radius: 5px;
-	color: #d82c2e;
+	color: #bd0029;
     text-align: center;
 }
 
-.card a:hover {
+.card a:hover, .card button:hover {
 	color: #fff;
-    background-color: #d82c2e;
+    background-color: #bd0029;
 }
 
 .user-comment {
@@ -319,17 +342,14 @@ li {
     text-align: left;
 }
 
-#articlesMenu h2 {
-    text-align: center;
-}
 
-.article-trailer {
+.articles {
     margin: 20px 0px;
     padding-bottom: 20px;
     border-bottom: solid 1px #000;
 }
 
-.article-trailer:last-child {
+.articles:last-child {
     border: none;
 }
 
@@ -393,16 +413,8 @@ li {
 
 /* ====== COMMENTS ====== */
 
-.commentShowBox {
-    display: flex;
-}
-
-.commentShow {
-    margin-left: 1rem;
-}
-
-.avatarShow {
-    width: 150px;
+.commentSubject {
+    text-align: center;
 }
 
 
@@ -441,23 +453,36 @@ li {
     display: flex;
 }
 
+.usersBand, .usersBandInfo {
+    overflow-y: scroll;
+    height: 75vh;
+}
+
+/* .usersBand::-webkit-scrollbar, .usersBandInfo::-webkit-scrollbar {
+    display: none;
+} */
+
 .usersBand {
     margin: 30px 0 30px -15px;
     padding: 15px;
     width: 20%;
-    background-color: #d82c2e;
+    background-color: #bd0029;
     border-radius: 0 10px 10px 0;
 }
 
 .usersBand img {
-    margin: 0.5rem 0;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.userBand {
+    color: #fff;
 }
 
 .userBandActive, .userBand:hover {
     margin: 0 -15px;
     padding-left: 15px;
     background-color: #fff;
-    color: #d82c2e;
+    color: #bd0029;
     cursor: pointer;
 }
 
@@ -467,10 +492,22 @@ li {
     width: 80%;
 }
 
+.avatarShow {
+    width: 150px;
+}
+
 .btnBanUpdate {
     background-color: #fff;
     padding: 0;
     width: 6rem;
+}
+
+.commentShowBox {
+    display: flex;
+}
+
+.commentShow {
+    margin-left: 0.5rem;
 }
 
 /* .userBandInfo {
@@ -493,13 +530,13 @@ footer{
 footer a{
 	font-size: 25px;  /*  rem ou em */
 	margin-bottom: 10px;
-	color: #d82c2e;
+	color: #bd0029;
 	height: 30px;
 }
 
 footer a:hover{
 	font-size: 30px;  /*  rem ou em */
-	color: #d82c2e;
+	color: #bd0029;
 }
 
 footer h3{

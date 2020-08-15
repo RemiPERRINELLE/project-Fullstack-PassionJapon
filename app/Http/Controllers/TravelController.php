@@ -52,8 +52,8 @@ class TravelController extends Controller
     public function show(Travel $travel)
     {
         $category = $travel->category;
-        $reactions = Reaction::where('reactions.travel_id', $travel->id)->join('users', 'reactions.user_id', '=', 'users.id')->orderByDesc('reactions.created_at')->get();
-        return view('travels/show', compact('travel', 'category', 'reactions'));
+        $reactionsByUsers = Reaction::select('reactions.id', 'note', 'comment', 'reactions.user_id', 'reactions.created_at', 'ban', 'avatar')->where('reactions.travel_id', $travel->id)->join('users', 'reactions.user_id', '=', 'users.id')->orderByDesc('reactions.created_at')->get();
+        return view('travels/show', compact('travel', 'category', 'reactionsByUsers'));
     }
 
     /**

@@ -15,7 +15,12 @@
         return $dateFormat;
     }
 
-    // format date dd/mm/yyyy hh:mm:ss ???????
+    // Date : dd/mm/yy hh:mm:ss
+    function fullDateFormat($date)
+    {
+        $fullDateFormat = \Carbon\Carbon::parse($date)->format('d/m/Y h:m:s');
+        return $fullDateFormat;
+    }
 
 
     // Verification of user's admin role

@@ -23,7 +23,7 @@
         @endauth
 
         @foreach($articles as $article)
-            <div class="article-trailer">
+            <div class="articles">
                 <img src="{{ asset('uploads/'.$article->image) }}" alt="{{ $article->image }}"/>
                 <h3>{{ $article->title }}</h3>
                 <p>{!! lineBreak($article->description) !!}</p>
@@ -31,10 +31,11 @@
                 @auth    
                     @if ( Auth::user()->role == 1 )
                         <a class="button" href="{{ route('articles.edit', $article->id) }}">Modifier</a>
-                        <form action="{{ route('articles.destroy', $article->id) }}" method="POST">
+                        <button class="buttonDestroy button">Supprimer</button>
+                        <form class="formDestroy mask" action="{{ route('articles.destroy', $article->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="button" type="submit">Supprimer</button>
+                            <button class="button" type="submit">Confirmer</button>
                         </form>
                     @endif
                 @endauth

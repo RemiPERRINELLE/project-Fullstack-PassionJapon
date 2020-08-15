@@ -25,8 +25,7 @@ class AdminController extends Controller
     public function moderation()
     {
         $users = User::all();
-        $reactions = Reaction::all();
-        return view('admin/moderation', compact('users', 'reactions'));
+        return view('admin/moderation', compact('users'));
     }
 
     /**
@@ -37,17 +36,17 @@ class AdminController extends Controller
      * @param $myonoff
      * @return \Illuminate\Http\Response
      */
-    public function banUpdate(User $user)
+    public function banUpdate(Request $request, User $user)
     {        
+        $ban = 'myonoffswitch'.$user->id;
         $user->update([
-            'ban' => $_POST['banInput'.$user->id],
+            'ban' => $request->$ban,
         ]);
         if( $user->ban == 1 ) {
             return back()->with('info', 'L\'utilisateur '.$user->pseudo.' est désormais banni');
         } else {
             return back()->with('info', 'L\'utilisateur '.$user->pseudo.' n\'est plus banni');
         }
-        
     }
 
     /**

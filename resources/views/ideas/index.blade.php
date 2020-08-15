@@ -3,15 +3,7 @@
 @section('content')
 
 	<section id="ideasMenu">
-		<div>
-			<h2>Idées</h2>
-		</div>
-		<div class="search">
-			<form method="GET" action="">
-				<input type="text" name="search" id="search" placeholder="Votre recherche">
-				<input type="submit" value="Rechercher">
-			</form>
-		</div>
+		<h2>Idées</h2>
 
 		@auth
 			@if ( Auth::user()->role == 1 )
@@ -21,6 +13,13 @@
 				@endif
 			@endif
 		@endauth
+		
+		<div class="search">
+			<form method="GET" action="">
+				<input type="text" name="search" id="search" placeholder="Votre recherche">
+				<input type="submit" value="Rechercher">
+			</form>
+		</div>
 
 		<div class="row">
 			@foreach($ideas as $idea)

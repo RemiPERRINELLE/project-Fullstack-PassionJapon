@@ -13,6 +13,7 @@ class CreateArticleIdeaTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('articles_ideas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();

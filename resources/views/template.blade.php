@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passion Japon</title>
 
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Merienda&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+
     <!-- MD BOOTSTRAP -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
@@ -59,12 +62,12 @@
                                 @if ( Auth::user()->role == 1 )
                                     <a class="dropdown-item" href="{{ route('dashboard') }}">Tableau de bord</a>
                                     <a class="dropdown-item" href="{{ route('moderation') }}">Modération</a>
-                                    <a class="dropdown-item" href="{{ route('media.create') }}">Gallerie</a>
+                                    <a class="dropdown-item" href="{{ route('media.create') }}">Galerie</a>
                                 @endif
                                 
                                 <a class="dropdown-item" href="{{ route('profile') }}">Profil</a>
                                 <a class="dropdown-item" href="{{ route('comments') }}">Commentaires</a>
-                                <a class="dropdown-item" href="{{ route('sales.index') }}">Commandes</a>
+                                <a class="dropdown-item" href="{{ route('commands') }}">Commandes</a>
                                 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

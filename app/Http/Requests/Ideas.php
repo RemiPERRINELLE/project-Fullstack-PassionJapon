@@ -26,7 +26,7 @@ class Ideas extends FormRequest
         return [
             'title' => ['required', 'string', 'max:100'],
             'description' => ['required', 'string', 'max:100000'],
-            'image' => ['required', 'string'],
+            'image' => ['required', 'string', 'max:100'],
         ];
     }
 }

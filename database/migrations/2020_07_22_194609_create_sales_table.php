@@ -13,6 +13,7 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('numberPlaces');

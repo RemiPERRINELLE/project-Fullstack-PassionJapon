@@ -29,6 +29,12 @@
                         @if ( Auth::user()->role == 1 )
                             <a class="button" href="{{ route('categories.show', $category->id) }}">Voir</a>
                             <a class="button" href="{{ route('categories.edit', $category->id) }}">Modifier</a>
+                            <button class="buttonDestroy button">Supprimer</button>
+                            <form class="formDestroy mask" action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="button" type="submit">Confirmer</button>
+                            </form>
                         @endif
                     @endauth
                 </div>

@@ -13,6 +13,7 @@ class CreateIdeaMediaTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('ideas_media', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('ideas_id');

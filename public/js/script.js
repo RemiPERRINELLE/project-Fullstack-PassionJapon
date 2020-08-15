@@ -1,6 +1,12 @@
 $(document).ready(function () {
 
 
+// =========================== BUTTON DESTROY ===========================
+
+    $('.buttonDestroy').click( function() {
+      $('.formDestroy').removeClass('mask');
+    });
+
 
 // =========================== NAVBAR ===========================
 

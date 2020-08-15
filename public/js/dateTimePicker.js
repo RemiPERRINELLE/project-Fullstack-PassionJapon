@@ -35,19 +35,19 @@
 	var Timepicker = function () {
 		this.regional = []; // Available regional settings, indexed by language code
 		this.regional[''] = { // Default regional settings
-			currentText: 'Now',
-			closeText: 'Done',
+			currentText: 'Heure actuelle',
+			closeText: 'Valider',
 			amNames: ['AM', 'A'],
 			pmNames: ['PM', 'P'],
 			timeFormat: 'HH:mm',
 			timeSuffix: '',
-			timeOnlyTitle: 'Choose Time',
-			timeText: 'Time',
-			hourText: 'Hour',
+			timeOnlyTitle: 'Choix de l\'horaire',
+			timeText: 'Horaire',
+			hourText: 'Heure',
 			minuteText: 'Minute',
-			secondText: 'Second',
-			millisecText: 'Millisecond',
-			microsecText: 'Microsecond',
+			secondText: 'Seconde',
+			millisecText: 'Milliseconde',
+			microsecText: 'Microseconde',
 			timezoneText: 'Time Zone',
 			isRTL: false
 		};

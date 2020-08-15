@@ -3,10 +3,10 @@
 @section('content')
     <form class="text-center border border-light p-5" action="{{ route('media.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <p class="h4 mb-4">Ajouter une image à la gallerie</p>
+        <p class="h4 mb-4">Ajouter une image à la galerie</p>
 
         <!-- IMAGE -->
-        <input type="file" name="image" accept="image/*" class="form-control mb-4" value="{{ old('image') }}" placeholder="Image gallerie">
+        <input type="file" name="image" accept="image/*" class="form-control mb-4">
 
         @error('image')
             <p>{{ $message }}</p>

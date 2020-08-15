@@ -9,8 +9,8 @@
             <div class="usersBand">
                 @foreach($users as $user)
                     <div id={{ $user->pseudo }} class="userBand">
-                        <img class="avatar avatarModeration" src="{{ asset('uploads/users/' . $user->id . '/' . $user->avatar) }}" alt="{{ $user->avatar }}"/>
-                        <span class="userModeration">{{ $user->pseudo }}</span>
+                        <img class="avatar" src="{{ asset('uploads/users/' . $user->id . '/' . $user->avatar) }}" alt="{{ $user->avatar }}"/>
+                        <span>{{ $user->pseudo }}</span>
                     </div>
                 @endforeach
             </div>
@@ -35,23 +35,24 @@
                                     <div style=" display:flex;">
                                         <span>Banni :</span>
                                         <div class="onoffswitch" id="{{ $user->id }}" style="margin-left: 0.5rem;">
-                                            {{-- @if( $user->ban == 0 ) --}}
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch{{ $user->id }}" tabindex="0" @if($user->ban == 1) checked @endif>
-                                            {{-- @else
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox checked" id="myonoffswitch{{ $user->id }}" tabindex="0" checked>
-                                            @endif --}}
-                                            <label class="onoffswitch-label" for="myonoffswitch{{ $user->id }}">
-                                                <span class="onoffswitch-inner"></span>
-                                                <span class="onoffswitch-switch"></span>
-                                            </label>
+                                            <form method="POST" action="{{ route('banUpdate', $user->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="checkbox" value="1" name="myonoffswitch{{ $user->id }}" class="onoffswitch-checkbox" id="myonoffswitch{{ $user->id }}" tabindex="0" @if($user->ban == 1) checked @endif>
+                                                <label class="onoffswitch-label" for="myonoffswitch{{ $user->id }}">
+                                                    <span class="onoffswitch-inner"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                                <button id="btnBanUpdate{{ $user->id }}" class="button btnBanUpdate mask" type="submit">Confirmer</button>
+                                            </form>
                                         </div>
                                     </div>
-                                    <form method="POST" action="{{ route('banUpdate', $user->id) }}">
+                                    {{-- <form method="POST" action="{{ route('banUpdate', $user->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <input id="banInput{{$user->id}}" name="banInput{{$user->id}}" class="d-none" type="text" value={{ old('ban', $user->ban) }}>
                                         <button id="btnBanUpdate{{ $user->id }}" class="button btnBanUpdate mask" type="submit">Confirmer</button>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -74,7 +75,6 @@
                     </div>
                     <h4>Commentaires</h4>
                     <div class="row mr-2 ml-2">
-                        
                         @php
                             $reactions = App\Reaction::where('reactions.user_id', $user->id)->get();
                             $ideas = App\Reaction::where('reactions.user_id', $user->id)->join('ideas', 'reactions.idea_id', '=', 'ideas.id')->get();
@@ -88,7 +88,7 @@
                                             $i=0;
                                         @endphp
                                         @foreach( $ideas as $idea)
-                                            @if( $reaction->idea_id == $idea->id && $i < 1)
+                                            @if( $reaction->idea_id == $idea->idea_id && $i < 1)
                                                 <p>Concernant l'idée {{ $idea->title }}</p>
                                                 @php
                                                     $i++;
@@ -100,7 +100,7 @@
                                             $i=0;
                                         @endphp
                                         @foreach( $travels as $travel)
-                                            @if( $reaction->travel_id == $travel->id && $i < 1 )
+                                            @if( $reaction->travel_id == $travel->travel_id && $i < 1 )
                                                 <p>Concernant le voyage {{ $travel->title }} du {{ $travel->date_start }}</p>
                                                 @php
                                                     $i++;
@@ -110,7 +110,7 @@
                                     @endif
                                     <p>Note : {{ $reaction->note }} / 5</p>
                                     <div class="commentShowBox">
-                                        <span>Commentaire : </span>
+                                        <span>Commentaire :</span>
                                         <div class="commentShow"><p>{!! lineBreak($reaction->comment) !!}</p></div>
                                     </div>
                                     @if( $reaction->idea_id )
@@ -119,7 +119,12 @@
                                     <a class="button fas fa-eye fa-lg" href="{{ route('travels.show', $reaction->travel_id) }}"></a>
                                     @endif
                                     <a class="button" href="{{ route('reactions.edit', $reaction->id) }}">Modifier</a>
-                                    <a class="button" href="{{ route('reactions.destroy', $reaction->id) }}">Supprimer</a>
+                                    <button class="buttonDestroy button">Supprimer</button>
+                                    <form class="formDestroy mask" action="{{ route('reactions.destroy', $reaction->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="button" type="submit">Confirmer</button>
+                                    </form>
                                 </div>
                             </div>
                         @endforeach

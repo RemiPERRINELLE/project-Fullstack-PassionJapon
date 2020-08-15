@@ -15,7 +15,12 @@
 					<h3>{{ $idea->title }}</h3>
                     <a class="button fas fa-eye fa-lg" href="{{ route('ideas.show', $idea->id) }}"></a>
                     <a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier</a>
-                    <a class="button" href="{{ route('ideas.destroy', $idea->id) }}">Supprimer</a>
+                    <button class="buttonDestroy button">Supprimer</button>
+                    <form class="formDestroy mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="button" type="submit">Confirmer</button>
+                    </form>
 				</div>
 			@endforeach
 		</div>

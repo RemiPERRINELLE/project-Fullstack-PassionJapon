@@ -3,6 +3,9 @@
 @section('content')
 
     <section class="travel">
+		@if(session()->has('info'))
+			<p>{{ session('info') }}</p>
+		@endif
         <img src="{{ asset('uploads/'.$category->image) }}" alt="{{ $category->image }}"/>
         <h3>Titre : {{ $category->title }}</h3>
         <p>Description : {{ lineBreak($travel->description) }}</p>
@@ -68,17 +71,32 @@
 				<span><a  class="button" href="{{ route('register') }}">S'inscrire</a></span>
 			@endauth
 
+
+
 			{{-- boucle récupérer les commentaires --}}
-			@foreach($reactions as $reaction)
-				@if( $reaction->ban == 0 )
+
+			@foreach($reactionsByUsers as $reactionByUser)
+				@if( $reactionByUser->ban == 0 )
 					<div class="card card-comment">
 						<div class="card-body">
 							<div class="user-comment">
-								<img class="avatar" src="{{ asset('uploads/users/' . $reaction->user->id . '/' . $reaction->avatar) }}" alt="{{ $reaction->avatar}}"/>
-								<span>{{ $reaction->pseudo }}</span>
-								<span class="user-note">{{ $reaction->note }} / 5</span>
+								<img class="avatar" src="{{ asset('uploads/users/' . $reactionByUser->user_id . '/' . $reactionByUser->avatar) }}" alt="{{ $reactionByUser->avatar}}"/>
+								<span>{{ $reactionByUser->pseudo }}</span>
+								<span class="user-note">{{ $reactionByUser->note }} / 5</span>
 							</div>
-							<p class="card-text">{!! lineBreak($reaction->comment) !!}</p>
+							<p class="card-text">{!! lineBreak($reactionByUser->comment) !!}</p>
+							<p>{{ $reactionByUser->created_at }}</p>
+							@auth    
+								@if ( Auth::user()->role == 1 )
+									<a class="button" href="{{ route('reactions.edit', $reactionByUser->id) }}">Modifier</a>
+									<button class="buttonDestroy button">Supprimer</button>
+									<form class="formDestroy mask" action="{{ route('reactions.destroy', $reactionByUser->id) }}" method="POST">
+										@csrf
+										@method('DELETE')
+										<button class="button" type="submit">Confirmer</button>
+									</form>
+								@endif
+							@endauth
 						</div>
 					</div>
 				@endif

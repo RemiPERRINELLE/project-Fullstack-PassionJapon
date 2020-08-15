@@ -26,16 +26,16 @@ class CreateReactionsTable extends Migration
                   ->onUpdate('restrict');
             $table->unsignedBigInteger('idea_id')->nullable();
             $table->foreign('idea_id')
-                ->references('id')
-                ->on('ideas')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+                  ->references('id')
+                  ->on('ideas')
+                  ->onDelete('restrict')
+                  ->onUpdate('restrict');
             $table->unsignedBigInteger('travel_id')->nullable();
             $table->foreign('travel_id')
-                    ->references('id')
-                    ->on('travels')
-                    ->onDelete('restrict')
-                    ->onUpdate('restrict');
+                  ->references('id')
+                  ->on('travels')
+                  ->onDelete('restrict')
+                  ->onUpdate('restrict');
             $table->timestamps();
         });
     }

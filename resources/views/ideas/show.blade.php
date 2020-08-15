@@ -4,19 +4,19 @@
 
 	<section class="idea">
 		<img src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
-		<h3>{{ $idea->title }}</h3>
+		<h2>{{ $idea->title }}</h2>
 		<p>{!! lineBreak($idea->description) !!}</p>
-		<h4>Images media reliées</h4>
-        @foreach($idea->media as $media)
-            <img src="{{ asset('uploads/'.$media->image) }}" alt="{{ $media->image }}"/>
-        @endforeach
+			@foreach($idea->media as $media)
+				<img class="ideaMedia" src="{{ asset('uploads/'.$media->image) }}" alt="{{ $media->image }}"/>
+			@endforeach
 		@auth    
 			@if ( Auth::user()->role == 1 )
 				<a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier</a>
-				<form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+				<button class="buttonDestroy button">Supprimer</button>
+				<form class="formDestroy mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
 					@csrf
 					@method('DELETE')
-					<button class="button" type="submit">Supprimer</button>
+					<button class="button" type="submit">Confirmer</button>
 				</form>
 			@endif
 		@endauth
@@ -55,16 +55,29 @@
 			@endauth
 
 			{{-- boucle récupérer les commentaires --}}
-			@foreach($reactions as $reaction)
-				@if( $reaction->ban == 0 )
+
+			@foreach($reactionsByUsers as $reactionByUser)
+				@if( $reactionByUser->ban == 0 )
 					<div class="card card-comment">
 						<div class="card-body">
 							<div class="user-comment">
-								<img class="avatar" src="{{ asset('uploads/users/' . Auth::user()->id . '/' . Auth::user()->avatar) }}"/>
-								<span>{{ $reaction->pseudo }}</span>
-								<span class="user-note">{{ $reaction->note }} / 5</span>
+								<img class="avatar" src="{{ asset('uploads/users/' . $reactionByUser->user_id . '/' . $reactionByUser->avatar) }}" alt="{{ $reactionByUser->avatar}}"/>
+								<span>{{ $reactionByUser->pseudo }}</span>
+								<span class="user-note">{{ $reactionByUser->note }} / 5</span>
 							</div>
-							<p class="card-text">{!! lineBreak($reaction->comment) !!}</p>
+							<p class="card-text">{!! lineBreak($reactionByUser->comment) !!}</p>
+							<p>{{ fullDateFormat($reactionByUser->created_at) }}</p>
+							@auth    
+								@if ( Auth::user()->role == 1 )
+									<a class="button" href="{{ route('reactions.edit', $reactionByUser->id) }}">Modifier</a>
+									<button class="buttonDestroy button">Supprimer</button>
+									<form class="formDestroy mask" action="{{ route('reactions.destroy', $reactionByUser->id) }}" method="POST">
+										@csrf
+										@method('DELETE')
+										<button class="button" type="submit">Confirmer</button>
+									</form>
+								@endif
+							@endauth
 						</div>
 					</div>
 				@endif
