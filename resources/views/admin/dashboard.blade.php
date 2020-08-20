@@ -7,21 +7,23 @@
     <div class="ideasDashBoard">
         <h2>Idées</h2>
         <div class="row">
-			@foreach($ideas as $idea)
-				<div class="col-xl-4 col-md-6">
-					<a href="{{ route('ideas.show', $idea->id) }}">
-						<img src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
-					</a>
-					<h3>{{ $idea->title }}</h3>
-                    <a class="button fas fa-eye fa-lg" href="{{ route('ideas.show', $idea->id) }}"></a>
-                    <a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier</a>
-                    <button class="buttonDestroy button">Supprimer</button>
-                    <form class="formDestroy mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="button" type="submit">Confirmer</button>
-                    </form>
-				</div>
+            @foreach($ideas as $idea)
+                @if( $idea->id != 1 )
+                    <div class="col-xl-4 col-md-6">
+                        <a href="{{ route('ideas.show', $idea->id) }}">
+                            <img src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
+                        </a>
+                        <h3>{{ $idea->title }}</h3>
+                        <a class="button fas fa-eye fa-lg" href="{{ route('ideas.show', $idea->id) }}"></a>
+                        <a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier</a>
+                        <button class="buttonDestroy button">Supprimer</button>
+                        <form class="formDestroy mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="button" type="submit">Confirmer</button>
+                        </form>
+                    </div>
+                @endif
 			@endforeach
 		</div>
     </div>
@@ -30,23 +32,23 @@
 
     <div class="articlesDashBoard">
         <h2>Articles</h2>
-        @foreach($articles as $article)
-            <div class="article-trailer">
-                <img src="{{ asset('uploads/'.$article->image) }}" alt="{{ $article->image }}"/>
-                <h3>{{ $article->title }}</h3>
-                <a class="button fas fa-eye fa-lg" href="{{ route('articles.show', $article->id) }}"></a>
-                @auth    
-                    @if ( Auth::user()->role == 1 )
-                        <a class="button" href="{{ route('articles.edit', $article->id) }}">Modifier</a>
-                        <form action="{{ route('articles.destroy', $article->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="button" type="submit">Supprimer</button>
-                        </form>
-                    @endif
-                @endauth
-            </div>
-        @endforeach
+        <div class="row">
+            @foreach($articles as $article)
+                <div class="col-xl-4 col-md-6">
+                    <a href="{{ route('articles.show', $article->id) }}">
+                        <img src="{{ asset('uploads/'.$article->image) }}" alt="{{ $article->image }}"/>
+                    </a>
+                    <h3>{{ $article->title }}</h3>
+                    <a class="button fas fa-eye fa-lg" href="{{ route('articles.show', $article->id) }}"></a>
+                    <a class="button" href="{{ route('articles.edit', $article->id) }}">Modifier</a>
+                    <form action="{{ route('articles.destroy', $article->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="button" type="submit">Supprimer</button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
     </div>
 
 
@@ -81,7 +83,7 @@
                                     $averageNote = 'X';
                                 }
                             @endphp
-                            <p class="travelDashBoardInfo">Du {{ $travelCat->date_start }} au {{ $travelCat->date_end }} - Note moyenne : {{ $averageNote }} ({{ $nbNotes }}) - Places vendues : à voir</p>
+                            <p class="travelDashBoardInfo">Du {{ dateFormat($travelCat->date_start) }} au {{ dateFormat($travelCat->date_end) }} - Note moyenne : {{ $averageNote }} ({{ $nbNotes }})</p>
                         @endforeach
                     </div>
             @endforeach

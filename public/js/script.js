@@ -16,6 +16,15 @@ $(document).ready(function () {
     });
 
 
+// =========================== NAVBAR ===========================
+
+    $("#footerUp").on("click", function(event){
+      event.preventDefault();
+      let hash = this.hash;
+      $('body,html').animate({scrollTop: $(hash).offset().top}, 1000, function(){window.location.hash = hash;});
+    });
+
+
 // =========================== CALENDAR ===========================
 
     // ========== LANGAGE ==========

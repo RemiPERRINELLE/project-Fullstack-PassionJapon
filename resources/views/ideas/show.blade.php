@@ -5,10 +5,15 @@
 	<section class="idea">
 		<img src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
 		<h2>{{ $idea->title }}</h2>
-		<p>{!! lineBreak($idea->description) !!}</p>
+		<p class="mb-4">{!! lineBreak($idea->description) !!}</p>
+		<div class="row">
 			@foreach($idea->media as $media)
+			<div class="col-lg-4 col-md-6">
 				<img class="ideaMedia" src="{{ asset('uploads/'.$media->image) }}" alt="{{ $media->image }}"/>
+			</div>
 			@endforeach
+		</div>
+			
 		@auth    
 			@if ( Auth::user()->role == 1 )
 				<a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier</a>
@@ -28,25 +33,31 @@
 			@auth
 				<form class="text-center border border-light p-5" action="{{ route('reactions.store')}}" method="POST">
 					@csrf
-					<input type="text" name="note" class="form-control mb-4" value="{{ old('note') }}" placeholder="Note sur 5">
+					<input type="text" name="note" class="form-control mt-4  @error('note') is-invalid @enderror" value="{{ old('note') }}" placeholder="Note sur 5">
 					@error('note')
-						<p>{{ $message }}</p>
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
 					@enderror
-					<div class="form-group">
-						<textarea class="form-control rounded-0" name="comment" rows="10" placeholder="Commentaire">{{ old('comment') }}</textarea>
-					</div>
+					<textarea class="form-control rounded-1 mt-4 mb-4  @error('comment') is-invalid @enderror" name="comment" rows="10" placeholder="Commentaire">{{ old('comment') }}</textarea>
 					@error('comment')
-						<p>{{ $message }}</p>
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
 					@enderror
 					<input type="text" name="user_id" class="form-control mb-4 mask" value="{{ Auth::user()->id }}" placeholder="user id">
 					@error('user_id')
-						<p>{{ $message }}</p>
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
 					@enderror
 					<input type="text" name="idea_id" class="form-control mb-4 mask" value="{{ $idea->id }}" placeholder="idea id">
 					@error('idea_id')
-						<p>{{ $message }}</p>
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
 					@enderror
-					<button class="btn btn-info btn-block" type="submit">Commenter</button>
+					<button class="button" type="submit">Commenter</button>
 				</form>
 			@else
 				<p>Vous devez être connecté pour pouvoir noter et commenter</p>
@@ -61,7 +72,7 @@
 					<div class="card card-comment">
 						<div class="card-body">
 							<div class="user-comment">
-								<img class="avatar" src="{{ asset('uploads/users/' . $reactionByUser->user_id . '/' . $reactionByUser->avatar) }}" alt="{{ $reactionByUser->avatar}}"/>
+								<img class="avatar" src="{{ $reactionByUser->avatar!=NULL ? asset('uploads/users/' . $reactionByUser->user_id . '/' . $reactionByUser->avatar) : asset('uploads/userDefault.png') }}" alt="Avatar utilisateur"/>
 								<span>{{ $reactionByUser->pseudo }}</span>
 								<span class="user-note">{{ $reactionByUser->note }} / 5</span>
 							</div>

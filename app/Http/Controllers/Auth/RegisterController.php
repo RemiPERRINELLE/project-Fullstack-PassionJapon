@@ -54,7 +54,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'pseudo' => ['required', 'string', 'max:255'],
-            'avatar' => ['required', 'image', 'max:2000'],
+            'avatar' => ['image', 'max:2000'],
             'name' => ['required', 'string', 'max:255'],
             'firstname' => ['required', 'string', 'max:255'],
             'sexe' => ['required', 'string', 'max:2'],
@@ -76,11 +76,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $avatar = $data['avatar'];
-        $avatarName = $avatar->getClientOriginalName();
         $user = User::create([
             'pseudo' => $data['pseudo'],
-            'avatar' => $avatarName,
             'name' => $data['name'],
             'firstname' => $data['firstname'],
             'sexe' => $data['sexe'],
@@ -92,12 +89,18 @@ class RegisterController extends Controller
             'country' => $data['country'],
             'phone' => $data['phone'],
         ]);
-        // $media = Media::create([
-        //     "image" => $avatarName,
-        // ]);
         $path = public_path().'/uploads/users/' . $user->id;
         File::makeDirectory($path);
-        $avatar->move('uploads/users/' . $user->id, $avatarName);
+
+        if( count($data) == 14 ) {
+            $avatar = $data['avatar'];
+            $avatarName = $avatar->getClientOriginalName();
+            $avatar->move('uploads/users/' . $user->id, $avatarName);
+            $user->update([
+                'avatar' => $avatarName
+            ]);
+        }
+
         return $user;
     }
 }

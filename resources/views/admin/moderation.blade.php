@@ -9,7 +9,7 @@
             <div class="usersBand">
                 @foreach($users as $user)
                     <div id={{ $user->pseudo }} class="userBand">
-                        <img class="avatar" src="{{ asset('uploads/users/' . $user->id . '/' . $user->avatar) }}" alt="{{ $user->avatar }}"/>
+                        <img class="avatar" src="{{ $user->avatar!=NULL ? asset('uploads/users/' . $user->id . '/' . $user->avatar) : asset('uploads/userDefault.png') }}" alt="Avatar utilisateur"/>
                         <span>{{ $user->pseudo }}</span>
                     </div>
                 @endforeach
@@ -20,7 +20,7 @@
                         <div class="col-4">
                             <div class="row">
                                 <div class="col-6">
-                                    <img class="avatarShow" src="{{ asset('uploads/users/' . $user->id . '/' . $user->avatar) }}" alt="{{ $user->avatar }}"/>
+                                    <img class="avatarShow" src="{{ $user->avatar!=NULL ? asset('uploads/users/' . $user->id . '/' . $user->avatar) : asset('uploads/userDefault.png') }}" alt="Avatar utilisateur"/>
                                     <p class="text-center">{{ $user->pseudo }}</p>
                                 </div>
                                 <div class="col-6">
@@ -33,7 +33,7 @@
                                     @endphp
                                     <p>Statut : {{ $userRole }}</p>
                                     <div style=" display:flex;">
-                                        <span>Banni :</span>
+                                        <span>Banni </span>
                                         <div class="onoffswitch" id="{{ $user->id }}" style="margin-left: 0.5rem;">
                                             <form method="POST" action="{{ route('banUpdate', $user->id) }}">
                                                 @csrf
@@ -47,12 +47,6 @@
                                             </form>
                                         </div>
                                     </div>
-                                    {{-- <form method="POST" action="{{ route('banUpdate', $user->id) }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <input id="banInput{{$user->id}}" name="banInput{{$user->id}}" class="d-none" type="text" value={{ old('ban', $user->ban) }}>
-                                        <button id="btnBanUpdate{{ $user->id }}" class="button btnBanUpdate mask" type="submit">Confirmer</button>
-                                    </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -67,10 +61,10 @@
                             @if ( $user->adress != '' )
                                 <p>Adresse : {{ $user->adress }} - {{ $user->postal_code }} - {{ $user->city }}</p>
                             @else
-                            <p>Adresse : {{ $user->city }} - {{ $user->postal_code }}</p>
+                                <p>Adresse : {{ $user->city }} - {{ $user->postal_code }}</p>
                             @endif
                             <p>Pays : {{ $user->country }}</p>
-                            <p>Téléphone : {{ $user->phone }}</p>
+                            <p>Téléphone : @if($user->phone != null) 0{{ $user->phone }}@endif</p>
                         </div>
                     </div>
                     <h4>Commentaires</h4>

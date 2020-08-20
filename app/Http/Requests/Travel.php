@@ -28,9 +28,10 @@ class Travel extends FormRequest
             'description' => ['required', 'string', 'max:100000'],
             'price' => ['required', 'integer'],
             'stock' => ['required', 'integer'],
-            'date_start' => ['required', 'date', 'after:tomorrow'],
+            'date_start' => ['required', 'date', 'after:today'],
             'date_end' => ['required', 'date', 'after:date_start'],
-            'date_closure' => ['required', 'date_format:Y-m-d H:i:s'],
+            'date_closure' => ['required', 'before:date_start', 'date_format:Y-m-d H:i:s'],
+            'closured' => ['required', 'string', 'max:3'],
         ];
     }
 }

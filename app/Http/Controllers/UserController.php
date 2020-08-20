@@ -72,6 +72,7 @@ class UserController extends Controller
             if( $usersRequest->avatar ) {
                 $avatar = $usersRequest->avatar;
                 $avatarName = $avatar->getClientOriginalName();
+                
                 if( file_exists('uploads/users/' . $user->id . '/' . $avatarName) ) {
                     return back()->with('image-error', "Ce nom d'image existe déjà");
                 } else {
@@ -190,7 +191,7 @@ class UserController extends Controller
     public function commands()
     {
         $sales = Sale::where('sales.user_id', Auth::user()->id)->get();
-        $travels = Sale::where('sales.user_id', Auth::user()->id)->join('travels', 'sales.travel_id', '=', 'travels.id')->join('categories', 'travels.category_id', '=', 'categories.id')->get();
+        $travels = Sale::select('travels.id', 'title', 'price', 'date_start')->where('sales.user_id', Auth::user()->id)->join('travels', 'sales.travel_id', '=', 'travels.id')->join('categories', 'travels.category_id', '=', 'categories.id')->get();
         return view('user/commands', compact('sales', 'travels'));
     }
 

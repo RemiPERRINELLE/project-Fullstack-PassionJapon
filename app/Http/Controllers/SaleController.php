@@ -40,7 +40,7 @@ class SaleController extends Controller
         $travel = Travel::find($saleRequest->travel_id);
         $newStock = $saleRequest->stock - $saleRequest->numberPlaces;
         $travel->update(['stock' => $newStock]);
-        return view('user/commands')->with('info', 'la commande a bien été enregistrée. Notre équipe va vous contacter dans les plus brefs délais afin de convenir du moyen et de la date de paiement ainsi que d\'obtenir des informations nécessaires pour l\'organisation du voyage.');
+        return redirect()->route('commands')->with('info', 'La commande a bien été enregistrée. Notre équipe va vous contacter dans les plus brefs délais afin de convenir du moyen et de la date de paiement ainsi que d\'obtenir des informations nécessaires pour l\'organisation du voyage.');
     }
 
     /**

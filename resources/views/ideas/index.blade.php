@@ -14,22 +14,24 @@
 			@endif
 		@endauth
 		
-		<div class="search">
+		{{-- <div class="search">
 			<form method="GET" action="">
 				<input type="text" name="search" id="search" placeholder="Votre recherche">
 				<input type="submit" value="Rechercher">
 			</form>
-		</div>
+		</div> --}}
 
 		<div class="row">
 			@foreach($ideas as $idea)
-				<div class="col-lg-4 col-md-6">
-					<a href="{{ route('ideas.show', $idea->id) }}">
-						<img src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
-					</a>
-					<h3>{{ $idea->title }}</h3>
-					<a class="button fas fa-eye fa-lg" href="{{ route('ideas.show', $idea->id) }}"></a>
-				</div>
+				@if( $idea->id != 1 )
+					<div class="col-lg-4 col-md-6">
+						<a href="{{ route('ideas.show', $idea->id) }}">
+							<img src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
+						</a>
+						<h3>{{ $idea->title }}</h3>
+						<a class="button fas fa-eye fa-lg" href="{{ route('ideas.show', $idea->id) }}"></a>
+					</div>
+				@endif
 			@endforeach
 		</div>
 	</section>

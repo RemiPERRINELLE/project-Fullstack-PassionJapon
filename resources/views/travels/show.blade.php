@@ -8,13 +8,13 @@
 		@endif
         <img src="{{ asset('uploads/'.$category->image) }}" alt="{{ $category->image }}"/>
         <h3>Titre : {{ $category->title }}</h3>
-        <p>Description : {{ lineBreak($travel->description) }}</p>
+        <p id="travelDesc">Description : {!! lineBreak($travel->description) !!}</p>
         <p>Prix : {{ $travel->price }}€</p>
         <p>Stock : {{ $travel->stock }}</p>
         <p>Du : {{ dateFormat($travel->date_start) }} au {{ dateFormat($travel->date_end) }}</p>
 		@auth
 			<button id="commandButton" class="button" href="">Commander</button>
-			<p>jusqu'au {{ dateFormat($travel->date_closure) }}</p>
+			<p>jusqu'au {{ fullDateFormat($travel->date_closure) }}</p>
 			<form id="commandForm" class="mask" method="POST" action="{{ route('sales.store') }}">
 				@csrf
 				<input type="number" name="numberPlaces" class="form-control mb-4" value="1" placeholder="1" min="1" max="{{ $travel->stock }}">
@@ -27,7 +27,7 @@
 					<p>{{ $message }}</p>
 				@enderror
 				<input type="number" name="stock" class="mask" value="{{ $travel->stock }}">
-				<button class="btn btn-info btn-block" type="submit">Confirmer la commande</button>
+				<button class="button" type="submit">Confirmer la commande</button>
 			</form>
 			@if ( Auth::user()->role == 1 )
 				<a class="button" href="{{ route('travels.edit', $travel->id) }}">Modifier</a>
@@ -45,25 +45,31 @@
 			@auth
 				<form class="text-center border border-light p-5" action="{{ route('reactions.store')}}" method="POST">
 					@csrf
-					<input type="text" name="note" class="form-control mb-4" value="{{ old('note') }}" placeholder="Note sur 5">
+					<input type="text" name="note" class="form-control mt-4  @error('note') is-invalid @enderror" value="{{ old('note') }}" placeholder="Note sur 5">
 					@error('note')
-						<p>{{ $message }}</p>
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
 					@enderror
-					<div class="form-group">
-						<textarea class="form-control rounded-0" name="comment" rows="10" placeholder="Commentaire">{{ old('comment') }}</textarea>
-					</div>
+					<textarea class="form-control rounded-1 mb-4 mt-4  @error('comment') is-invalid @enderror" name="comment" rows="10" placeholder="Commentaire">{{ old('comment') }}</textarea>
 					@error('comment')
-						<p>{{ $message }}</p>
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
 					@enderror
 					<input type="text" name="user_id" class="form-control mb-4 mask" value="{{ Auth::user()->id }}" placeholder="user id">
 					@error('user_id')
-						<p>{{ $message }}</p>
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
 					@enderror
 					<input type="text" name="travel_id" class="form-control mb-4 mask" value="{{ $travel->id }}" placeholder="travel id">
 					@error('travel_id')
-						<p>{{ $message }}</p>
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
 					@enderror
-					<button class="btn btn-info btn-block" type="submit">Commenter</button>
+					<button class="button" type="submit">Commenter</button>
 				</form>
 			@else
 				<p>Vous devez être connecté pour pouvoir noter et commenter</p>
@@ -80,7 +86,7 @@
 					<div class="card card-comment">
 						<div class="card-body">
 							<div class="user-comment">
-								<img class="avatar" src="{{ asset('uploads/users/' . $reactionByUser->user_id . '/' . $reactionByUser->avatar) }}" alt="{{ $reactionByUser->avatar}}"/>
+								<img class="avatar" src="{{ $reactionByUser->avatar!=NULL ? asset('uploads/users/' . $reactionByUser->user_id . '/' . $reactionByUser->avatar) : asset('uploads/userDefault.png') }}" alt="Avatar utilisateur"/>
 								<span>{{ $reactionByUser->pseudo }}</span>
 								<span class="user-note">{{ $reactionByUser->note }} / 5</span>
 							</div>

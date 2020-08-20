@@ -45,7 +45,7 @@ class MediaController extends Controller
             $media = Media::create([
                 "image" => $imageName,
             ]);
-            return back()->with('info', 'L\'idée a bien été créée');
+            return back()->with('info', 'L\'image a bien été insérée');
         }
     }
 

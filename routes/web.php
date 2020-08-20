@@ -14,11 +14,7 @@
 use App\Ideas;
 
 
-Route::get('/', function () {
-    $idea = Ideas::find(1);
-    $idea->with('media')->get();
-    return view('home');
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 

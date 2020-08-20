@@ -9,7 +9,7 @@
 
     <section class="comments">
         <div class="card main-card">
-            <h2>Vos Commentaires</h2>
+            <h4>Vos Commentaires</h4>
             @foreach( $reactions as $reaction )
                         <div class="card card-comment">
                             <div class="card-body">
@@ -45,6 +45,12 @@
                                 <p class="card-text">{!! lineBreak($reaction->comment) !!}</p>
 							    <p>{{ fullDateFormat($reaction->created_at) }}</p>
                                 <a class="button" href="{{ route('reactions.edit', $reaction->id) }}">Modifier</a>
+                                <button class="buttonDestroy button">Supprimer</button>
+                                <form class="formDestroy mask" action="{{ route('reactions.destroy', $reaction->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="button" type="submit">Confirmer</button>
+                                </form>
                             </div>
                         </div>
             @endforeach

@@ -7,19 +7,23 @@
         <p class="h4 mb-4">Créer une catégorie</p>
 
         <!-- TITLE -->
-        <input type="text" name="title" class="form-control mb-4" value="{{ old('title') }}" placeholder="Titre catégorie">
+        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Titre catégorie">
         @error('title')
-            <p>{{ $message }}</p>
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
         @enderror
 
         <!-- IMAGE -->
-        <input type="text" name="image" class="form-control mb-4" value="{{ old('image') }}" placeholder="Image catégorie">
+        <input type="text" name="image" class="form-control mt-4 @error('image') is-invalid @enderror" value="{{ old('image') }}" placeholder="Image catégorie">
         @error('image')
-            <p>{{ $message }}</p>
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
         @enderror
 
         <!-- Send button -->
-        <button class="btn btn-info btn-block" type="submit">Créer</button>
+        <button class="button" type="submit">Créer</button>
 
         <a class="button" href="{{ route('travels.index') }}">Retour</a>
     </form>

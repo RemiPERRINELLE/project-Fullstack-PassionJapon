@@ -33,7 +33,7 @@ class Users extends FormRequest
             'postal_code' => ['required', 'integer'],
             'city' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
-            'phone' => ['nullable', 'string'],
+            'phone' => ['nullable', 'string', 'max:20'],
         ];
     }
 }

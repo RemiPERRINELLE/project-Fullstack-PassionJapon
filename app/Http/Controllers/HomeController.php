@@ -3,18 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Ideas;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +15,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $idea = Ideas::find(1);
+        $idea->with('media')->get();
+        return view('home', compact('idea'));
         return view('home');
     }
 }

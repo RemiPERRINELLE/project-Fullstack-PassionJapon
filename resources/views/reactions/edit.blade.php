@@ -14,7 +14,7 @@
         @error('comment')
             <p>{{ $message }}</p>
         @enderror
-        <button class="btn btn-info btn-block" type="submit">Modifier</button>
+        <button class="button" type="submit">Modifier</button>
         <a class="button" href="{{ route('comments') }}">Retour</a>
     </form>
 @endsection

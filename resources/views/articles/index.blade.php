@@ -6,12 +6,12 @@
         <div>
             <h2>Articles</h2>
         </div>
-        <div class="search">
+        {{-- <div class="search">
             <form method="GET" action="">
                 <input type="text" name="search" id="search" placeholder="Votre recherche">
                 <input type="submit" value="Rechercher">
             </form>
-        </div>
+        </div> --}}
 
         @auth
             @if ( Auth::user()->role == 1 )
@@ -24,7 +24,9 @@
 
         @foreach($articles as $article)
             <div class="articles">
-                <img src="{{ asset('uploads/'.$article->image) }}" alt="{{ $article->image }}"/>
+                <a href="{{ route('articles.show', $article->id) }}">
+                    <img src="{{ asset('uploads/'.$article->image) }}" alt="{{ $article->image }}"/>
+                </a>
                 <h3>{{ $article->title }}</h3>
                 <p>{!! lineBreak($article->description) !!}</p>
                 <a class="button fas fa-eye fa-lg" href="{{ route('articles.show', $article->id) }}"></a>
