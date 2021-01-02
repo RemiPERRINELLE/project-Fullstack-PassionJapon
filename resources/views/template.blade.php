@@ -37,10 +37,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
 </head>
 <body>
+
     <!-- NAVBAR -->
-
-    <div id="menu"></div>
-
     <nav class="navbar navbar-expand-md sticky-top">
         <a class="navbar-brand" href="{{ route('home') }}"><span>JAPAN</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
@@ -109,7 +107,6 @@
 
 
     <!-- FOOTER -->
-
     <footer>
         <a id="footerUp" class="fas fa-chevron-up" href="#menu"></a>
         <h3>© Rémi PERRINELLE - 2020 - Passion <span class="title-japon">Japon</span><span class="title-point"></span></h3>
