@@ -272,7 +272,11 @@ li {
     width: 100%;
 }
 
-
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 100px !important;
+    height: 100px !important;
+}
 
 
 
