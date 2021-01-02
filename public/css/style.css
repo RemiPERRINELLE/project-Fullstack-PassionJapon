@@ -131,7 +131,7 @@ li {
 
 @media (max-width: 840px) {
     .navbar-collapse {
-        font-size: 0.6rem !important;
+        font-size: 0.645rem !important;
     }
 }
 
