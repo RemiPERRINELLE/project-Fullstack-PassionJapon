@@ -10,6 +10,27 @@ $(document).ready(function () {
 
 // =========================== NAVBAR ===========================
 
+    var carouselWidth = $(window).width() - 30;
+    var carouselHeight = carouselWidth * 0.33;
+
+    $('.carousel-item img').css('height', carouselHeight);
+
+    console.log('largeur ' + carouselWidth);
+    console.log('longueur ' + carouselHeight);
+    console.log('ratio ' + carouselHeight / carouselWidth);
+
+    $(window).resize( function() {
+      carouselWidth = $(window).width() - 30;
+      carouselHeight = carouselWidth * 0.33;
+      $('.carousel-item img').css('height', carouselHeight);
+      console.log('largeur ' + carouselWidth);
+      console.log('longueur ' + carouselHeight);
+      console.log('ratio ' + carouselHeight / carouselWidth);
+    });
+
+
+// =========================== CAROUSSEL ===========================
+
     $('.navbar-toggler').on('click', function () {
       $('.animated-icon').toggleClass('open');
     });

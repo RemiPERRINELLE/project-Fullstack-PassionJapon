@@ -7,7 +7,7 @@
         <div class="carousel-inner">
             @foreach( $idea->media as $media )
                 <div class="carousel-item @if( $media == $idea->media[0] ) active @endif">
-                    <img class="d-block w-100 h-400" src="{{ asset('uploads/'.$media->image) }}"
+                    <img class="d-block" src="{{ asset('uploads/'.$media->image) }}"
                     alt="{{ $media->image }}">
                 </div>
             @endforeach
