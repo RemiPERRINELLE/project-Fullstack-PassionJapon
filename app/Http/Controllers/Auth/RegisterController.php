@@ -52,6 +52,26 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        if(empty($_POST['g-recaptcha-response'])){
+			return Validator::make($data, [
+                'g-recaptcha-response' => ['required',],
+            ]);
+		} else {
+			$captcha=$_POST['g-recaptcha-response'];
+		}
+		$secretKey = env('NOCAPTCHA_SECRET');
+		$ip = $_SERVER['REMOTE_ADDR'];
+		// post request to server
+		$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+		$response = file_get_contents($url);
+		$responseKeys = json_decode($response,true);
+		// should return JSON with success as true
+		if(!$responseKeys["success"]) {
+			return Validator::make($data, [
+                'g-recaptcha-response' => ['captcha',],
+            ]);
+		}
+
         return Validator::make($data, [
             'pseudo' => ['required', 'string', 'max:255'],
             'avatar' => ['image', 'max:2000'],
@@ -92,7 +112,7 @@ class RegisterController extends Controller
         $path = public_path().'/uploads/users/' . $user->id;
         File::makeDirectory($path);
 
-        if( count($data) == 14 ) {
+        if( count($data) == 15 ) {
             $avatar = $data['avatar'];
             $avatarName = $avatar->getClientOriginalName();
             $avatar->move('uploads/users/' . $user->id, $avatarName);

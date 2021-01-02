@@ -3,17 +3,28 @@
 @section('content')
 
     <section id="travelsMenu">
-        <div>
-            <h2>Circuits</h2>
-        </div>
+        <h2>Circuits</h2>
 
         @auth
             @if ( Auth::user()->role == 1 )
+                @if(session()->has('info1') || session()->has('category') || session()->has('info2'))
+                    <div class="alert alert-success col-6 text-center" role="alert">
+                        {{ session('info1') }}<a href="{{route('categories.show', session('categoryId'))}}'" class="alert-link">{{ session('category') }}</a>{{ session('info2') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                @if(session()->has('infoA') || session()->has('categoryTitle') || session()->has('infoB'))
+                    <div class="alert alert-success col-6 text-center" role="alert">
+                        {{ session('infoA') }}<strong>{{ session('categoryTitle') }}</strong>{{ session('infoB') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <a class="button" href="{{ route('travels.create') }}">Créer un voyage</a>
                 <a class="button" href="{{ route('categories.create') }}">Créer une catégorie</a>
-                @if(session()->has('info'))
-                    <p>{{ session('info') }}</p>
-                @endif
             @endif
         @endauth
 

@@ -31,7 +31,6 @@ class Travel extends FormRequest
             'date_start' => ['required', 'date', 'after:today'],
             'date_end' => ['required', 'date', 'after:date_start'],
             'date_closure' => ['required', 'before:date_start', 'date_format:Y-m-d H:i:s'],
-            'closured' => ['required', 'string', 'max:3'],
         ];
     }
 }

@@ -3,7 +3,12 @@
 @section('content')
 
     @if(session()->has('info'))
-        <p>{{ session('info') }}</p>
+        <div class="alert alert-success col-4 text-center" role="alert">
+            {{ session('info') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     @endif
 
     <section class="commands">
@@ -17,9 +22,11 @@
                                 @endphp
                                 @foreach( $travels as $travel)
                                     @if( $sale->travel_id == $travel->id && $i < 1 )
-                                        <p>Concernant le voyage {{ dateFormat($travel->title) }} du {{ dateFormat($travel->date_start) }}</p>
-                                        <p>Places achetées : {{$sale->numberPlaces}}</p>
-                                        <p>Montant : {{$sale->numberPlaces * $travel->price}}€</p>
+                                        <p class="font-weight-bold">Voyage {{ $travel->title }} du {{ dateFormat($travel->date_start) }}</p>
+                                        <p><span class="travelPrice">{{ $sale->numberPlaces * $travel->price }}€</span><span class="ml-2"> pour {{ $sale->numberPlaces }} places.</span></p>
+                                        <p class="card-text">Commande du {{ fullDateFormat($sale->created_at) }}</p>
+                                        {{-- <p>Places achetées : {{ $sale->numberPlaces }}</p> --}}
+                                        {{-- <p>Montant : {{$sale->numberPlaces * $travel->price}}€</p> --}}
                                         @php
                                             $i++;
                                         @endphp

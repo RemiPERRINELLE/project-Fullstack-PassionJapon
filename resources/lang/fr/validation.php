@@ -129,8 +129,9 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'g-recaptcha-response' => [
+            'required' => 'Veuillez cocher le reCAPTCHA.',
+            'captcha'  => 'Erreur survenue lors du recaptcha.',
         ],
     ],
 

@@ -8,6 +8,10 @@
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Merienda&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
 
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
     <!-- MD BOOTSTRAP -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
@@ -23,6 +27,12 @@
     <!-- ON / OFF -->
     <link rel="stylesheet" href="{{ asset('css/on-off.css') }}" type="text/css">
 
+    <!-- LIGHTBOX -->
+    <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}"/>
+
+    <!-- reCAPTCHA v2 Checkbox -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
 </head>
@@ -36,12 +46,13 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
             <div class="animated-icon"><span></span><span></span><span></span></div>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="myNavbar">
+        <div id="navbarBlock1" class="collapse navbar-collapse justify-content-end" id="myNavbar">
             <ul class="nav nav-pills navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('ideas.index') }}">Idées</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('articles.index') }}">Articles</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('travels.index') }}">Circuits</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('games') }}">Jeux</a></li>
             </ul>
         </div>
 
@@ -103,7 +114,6 @@
         <a id="footerUp" class="fas fa-chevron-up" href="#menu"></a>
         <h3>© Rémi PERRINELLE - 2020 - Passion <span class="title-japon">Japon</span><span class="title-point"></span></h3>
         <p>Contact : <a href="mailto:passion.japon-0928f2@inbox.mailtrap.io" title="Contactez-nous">passion.japon-0928f2@inbox.mailtrap.io</a></p>
-        <p><a href="#">Conditions générales</a></p>
     </footer>
     
 
@@ -113,11 +123,17 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/js/mdb.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
         
         <script   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   crossorigin="anonymous"></script>
+        
 
         <script type="text/javascript" src="{{ asset('js/datepicker-fr.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/dateTimePicker.js') }}"></script>
+
+        <script src="{{ asset('js/lightbox.min.js') }}"></script>
+
 
         <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
         

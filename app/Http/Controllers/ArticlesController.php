@@ -40,7 +40,7 @@ class ArticlesController extends Controller
     {
         $article = Articles::create($articlesRequest->all());
         $article->ideas()->attach($articlesRequest->ideas);
-        return redirect()->route('articles.index')->with('info', 'L\'article a bien été créé');
+        return redirect()->route('articles.index')->with('info1', 'L\'article ')->with('articleId', $article->id)->with('article', $article->title)->with('info2', ' a bien été créé');
     }
 
     /**
@@ -78,7 +78,7 @@ class ArticlesController extends Controller
     {
         $article->update($articlesRequest->all());
         $article->ideas()->sync($articlesRequest->ideas);
-        return redirect()->route('articles.index')->with('info', 'L\'article a bien été modifié');
+        return redirect()->route('articles.index')->with('info1', 'L\'article ')->with('articleId', $article->id)->with('article', $article->title)->with('info2', ' a bien été modifié');
     }
 
     /**
@@ -91,6 +91,6 @@ class ArticlesController extends Controller
     {
         $article->delete();
 
-        return back()->with('info', 'L\'article a bien été supprimé');
+        return redirect()->route('articles.index')->with('infoA', 'L\'article ')->with('articleTitle', $article->title)->with('infoB', ' a bien été supprimé');
     }
 }

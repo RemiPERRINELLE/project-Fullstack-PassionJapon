@@ -40,7 +40,7 @@ class IdeasController extends Controller
     {
         $idea = Ideas::create($ideasRequest->all());
         $idea->media()->attach($ideasRequest->medias);
-        return redirect()->route('ideas.index')->with('info', 'L\'idée a bien été créée');
+        return redirect()->route('ideas.index')->with('info1', 'L\'idée ')->with('ideaId', $idea->id)->with('idea', $idea->title)->with('info2', ' a bien été créée');
     }
 
     /**
@@ -51,7 +51,7 @@ class IdeasController extends Controller
      */
     public function show(Ideas $idea)
     {
-        $reactionsByUsers = Reaction::select('reactions.id', 'note', 'comment', 'reactions.user_id', 'reactions.created_at', 'ban', 'avatar', 'pseudo')->join('users', 'reactions.user_id', '=', 'users.id')->where('reactions.idea_id', $idea->id)->orderByDesc('reactions.created_at')->get();
+        $reactionsByUsers = Reaction::select('reactions.id', 'note', 'comment', 'reactions.user_id', 'reactions.updated_at', 'ban', 'avatar', 'pseudo')->join('users', 'reactions.user_id', '=', 'users.id')->where('reactions.idea_id', $idea->id)->orderByDesc('reactions.created_at')->get();
         $idea->with('media')->get();
         return view('ideas/show', compact('idea', 'reactionsByUsers'));
     }
@@ -79,7 +79,7 @@ class IdeasController extends Controller
     {
         $idea->update($ideasRequest->all());
         $idea->media()->sync($ideasRequest->medias);
-        return redirect()->route('ideas.index')->with('info', 'L\'idée a bien été modifiée');
+        return redirect()->route('ideas.index')->with('info1', 'L\'idée ')->with('ideaId', $idea->id)->with('idea', $idea->title)->with('info2', ' a bien été modifiée');
     }
 
     /**
@@ -91,7 +91,7 @@ class IdeasController extends Controller
     public function destroy(Ideas $idea)
     {
         $idea->delete();
-        return redirect()->route('ideas.index')->with('info', 'L\'idée a bien été supprimée');
+        return redirect()->route('ideas.index')->with('infoA', 'L\'idée ')->with('ideaTitle', $idea->title)->with('infoB', ' a bien été supprimée');
     }
 
 

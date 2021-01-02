@@ -37,8 +37,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $categoryRequest)
     {
-        Category::create($categoryRequest->all());
-        return redirect()->route('travels.index')->with('info', 'La catégorie a bien été créée');
+        $category = Category::create($categoryRequest->all());
+        return redirect()->route('travels.index')->with('info1', 'La catégorie ')->with('categoryId', $category->id)->with('category', $category->title)->with('info2', ' a bien été créée');
     }
 
     /**
@@ -74,7 +74,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $categoryRequest, Category $category)
     {
         $category->update($categoryRequest->all());
-        return redirect()->route('travels.index')->with('info', 'La catégorie a bien été modifiée');
+        return redirect()->route('travels.index')->with('info1', 'La catégorie ')->with('categoryId', $category->id)->with('category', $category->title)->with('info2', ' a bien été modifiée');
     }
 
     /**
@@ -86,6 +86,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return back()->with('info', 'La catégorie a bien été supprimée');
+        return redirect()->route('travels.index')->with('infoA', 'La catégorie ')->with('categoryTitle', $category->title)->with('infoB', ' a bien été supprimée');
     }
 }

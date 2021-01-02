@@ -43,9 +43,9 @@ class AdminController extends Controller
             'ban' => $request->$ban,
         ]);
         if( $user->ban == 1 ) {
-            return back()->with('info', 'L\'utilisateur '.$user->pseudo.' est désormais banni');
+            return back()->with('info1', 'L\'utilisateur ')->with('pseudo', $user->pseudo)->with('info2', ' est désormais banni');
         } else {
-            return back()->with('info', 'L\'utilisateur '.$user->pseudo.' n\'est plus banni');
+            return back()->with('info1', 'L\'utilisateur ')->with('pseudo', $user->pseudo)->with('info2', ' n\'est plus banni');
         }
     }
 

@@ -22,9 +22,25 @@
             </span>
         @enderror
 
+        <!-- INTRODUCTION -->
+        <textarea class="form-control rounded-1 mt-4 @error('introduction') is-invalid @enderror" name="introduction" rows="10" placeholder="Introduction">{{ old('introduction', $article->introduction) }}</textarea>
+        @error('introduction')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+
         <!-- DESCRIPTION -->
         <textarea class="form-control rounded-1 mt-4 @error('description') is-invalid @enderror" name="description" rows="10" placeholder="Description">{{ old('description', $article->description) }}</textarea>
         @error('description')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+
+        <!-- CONCLUSION -->
+        <textarea class="form-control rounded-1 mt-4 @error('conclusion') is-invalid @enderror" name="conclusion" rows="10" placeholder="Conclusion">{{ old('conclusion', $article->conclusion) }}</textarea>
+        @error('conclusion')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

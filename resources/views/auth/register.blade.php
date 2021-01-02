@@ -188,6 +188,24 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="g-recaptcha" data-sitekey={{env('NOCAPTCHA_SITEKEY')}}></div>
+
+                                @error('g-recaptcha-response')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                @if(session()->has('info'))
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        {{ session('info') }}
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="button">

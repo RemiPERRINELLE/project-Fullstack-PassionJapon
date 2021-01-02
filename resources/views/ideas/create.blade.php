@@ -42,8 +42,8 @@
         </div>
 
         <button class="button" type="submit">Créer</button>
-
-        <a class="button" href="{{ route('ideas.index') }}">Retour</a>
-
     </form>
+
+    <a class="button" href="{{ route('ideas.index') }}">Retour</a>
+
 @endsection

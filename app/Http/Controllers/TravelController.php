@@ -40,7 +40,8 @@ class TravelController extends Controller
     public function store(TravelRequest $travelRequest)
     {
         Travel::create($travelRequest->all());
-        return redirect()->route('travels.index')->with('info', 'Le voyage a bien été créé');
+        $category = $travel->category;
+        return redirect()->route('categories.show', $category->id)->with('info1', 'Le voyage de la catégorie ')->with('travelId', $travel->id)->with('category', $category->title)->with('info2', ' a bien été créé');
     }
 
     /**
@@ -52,7 +53,7 @@ class TravelController extends Controller
     public function show(Travel $travel)
     {
         $category = $travel->category;
-        $reactionsByUsers = Reaction::select('reactions.id', 'note', 'comment', 'reactions.user_id', 'reactions.created_at', 'ban', 'avatar')->where('reactions.travel_id', $travel->id)->join('users', 'reactions.user_id', '=', 'users.id')->orderByDesc('reactions.created_at')->get();
+        $reactionsByUsers = Reaction::select('reactions.id', 'note', 'comment', 'reactions.user_id', 'reactions.updated_at', 'ban', 'avatar', 'pseudo')->where('reactions.travel_id', $travel->id)->join('users', 'reactions.user_id', '=', 'users.id')->orderByDesc('reactions.created_at')->get();
         return view('travels/show', compact('travel', 'category', 'reactionsByUsers'));
     }
 
@@ -79,7 +80,8 @@ class TravelController extends Controller
     public function update(TravelRequest $travelRequest, Travel $travel)
     {
         $travel->update($travelRequest->all());
-        return redirect()->route('travels.index')->with('info', 'Le voyage a bien été modifié');
+        $category = $travel->category;
+        return redirect()->route('categories.show', $category->id)->with('info1', 'Le voyage de la catégorie ')->with('travelId', $travel->id)->with('category', $category->title)->with('info2', ' a bien été modifié');
     }
 
     /**
@@ -91,6 +93,7 @@ class TravelController extends Controller
     public function destroy(Travel $travel)
     {
         $travel->delete();
-        return back()->with('info', 'Le voyage a bien été supprimé');
+        $category = $travel->category;
+        return redirect()->route('categories.show', $category->id)->with('infoA', 'Le voyage de la catégorie ')->with('categoryTitle', $category->title)->with('infoB', ' a bien été supprimé');
     }
 }

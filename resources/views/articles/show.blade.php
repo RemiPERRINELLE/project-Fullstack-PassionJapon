@@ -2,14 +2,20 @@
 
 @section('content')
     <section class="article">
-        <img src="{{ asset('uploads/'.$article->image) }}" alt="{{ $article->image }}"/>
+        <a href="{{ asset('uploads/'.$article->image) }}" data-lightbox="{{ $article->image }}" data-title="{{ $article->title }}">
+            <img src="{{ asset('uploads/'.$article->image) }}" alt="{{ $article->image }}"/>
+        </a>
         <h2>{{ $article->title }}</h2>
-        <p class="mb-4">{!! lineBreak($article->description) !!}</p>
+        <p class="mb-4">{!! lineBreak($article->introduction) !!}</p>
+        <p class="mb-4 mt-5">{!! lineBreak($article->description) !!}</p>
         @foreach($article->ideas as $idea)
             <h3>{{ $idea->title }}</h3>
-            <img class="mb-4 ideaMedia" src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
+            <a href="{{ asset('uploads/'.$idea->image) }}" data-lightbox="Images secondaires" data-title="{{ $idea->title }}">
+                <img class="mb-4 ideaMedia" src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
+            </a>
             <p class="mb-4">{!! lineBreak($idea->description) !!}</p>
         @endforeach
+        <p class="mb-4 mt-5">{!! lineBreak($article->conclusion) !!}</p>
         @auth    
             @if ( Auth::user()->role == 1 )
                 <a class="button" href="{{ route('articles.edit', $article->id) }}">Modifier</a>

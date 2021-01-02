@@ -3,13 +3,17 @@
 @section('content')
 
 	<section class="idea">
-		<img src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
+		<a href="{{ asset('uploads/'.$idea->image) }}" data-lightbox="{{ $idea->image }}" data-title="{{ $idea->title }}">
+			<img src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
+		</a>
 		<h2>{{ $idea->title }}</h2>
 		<p class="mb-4">{!! lineBreak($idea->description) !!}</p>
 		<div class="row">
 			@foreach($idea->media as $media)
 			<div class="col-lg-4 col-md-6">
-				<img class="ideaMedia" src="{{ asset('uploads/'.$media->image) }}" alt="{{ $media->image }}"/>
+				<a href="{{ asset('uploads/'.$media->image) }}" data-lightbox="Images secondaires" data-title="{{ $idea->title }} : images secondaires">
+					<img class="ideaMedia" src="{{ asset('uploads/'.$media->image) }}" alt="{{ $media->image }}"/>
+				</a>
 			</div>
 			@endforeach
 		</div>
@@ -31,15 +35,22 @@
 		<div class="card main-card">
 			<h4>Commentaires</h4>
 			@auth
-				<form class="text-center border border-light p-5" action="{{ route('reactions.store')}}" method="POST">
+				<form class="text-center pb-5 pl-5 pr-5 pt-0" action="{{ route('reactions.store')}}" method="POST">
 					@csrf
-					<input type="text" name="note" class="form-control mt-4  @error('note') is-invalid @enderror" value="{{ old('note') }}" placeholder="Note sur 5">
+					<p class="noteStars text-left"> Note :
+						<span class="1star user-note-no-point pointer">&#x2606</span>
+						<span class="2stars user-note-no-point pointer">&#x2606</span>
+						<span class="3stars user-note-no-point pointer">&#x2606</span>
+						<span class="4stars user-note-no-point pointer">&#x2606</span>
+						<span class="5stars user-note-no-point pointer">&#x2606</span>
+					</p>
+					<input type="number" name="note" class="noteChoice mask form-control mt-4 col-2 @error('note') is-invalid @enderror" value="{{ old('note') }}" min="1" max="5">
 					@error('note')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>
 						</span>
 					@enderror
-					<textarea class="form-control rounded-1 mt-4 mb-4  @error('comment') is-invalid @enderror" name="comment" rows="10" placeholder="Commentaire">{{ old('comment') }}</textarea>
+					<textarea class="form-control rounded-1 mt-4 mb-4  @error('comment') is-invalid @enderror" name="comment" rows="5" placeholder="Commentaire">{{ old('comment') }}</textarea>
 					@error('comment')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>
@@ -61,23 +72,28 @@
 				</form>
 			@else
 				<p>Vous devez être connecté pour pouvoir noter et commenter</p>
-				<a href="{{ route('login') }}">Se connecter</a>
-				<a href="{{ route('register') }}">S'inscrire</a>
+				<a class="button" href="{{ route('login') }}">Se connecter</a>
+				<a class="button" href="{{ route('register') }}">S'inscrire</a>
 			@endauth
 
 			{{-- boucle récupérer les commentaires --}}
 
+			@php
+				$i=1;
+			@endphp
 			@foreach($reactionsByUsers as $reactionByUser)
 				@if( $reactionByUser->ban == 0 )
 					<div class="card card-comment">
 						<div class="card-body">
 							<div class="user-comment">
-								<img class="avatar" src="{{ $reactionByUser->avatar!=NULL ? asset('uploads/users/' . $reactionByUser->user_id . '/' . $reactionByUser->avatar) : asset('uploads/userDefault.png') }}" alt="Avatar utilisateur"/>
-								<span>{{ $reactionByUser->pseudo }}</span>
-								<span class="user-note">{{ $reactionByUser->note }} / 5</span>
+								<a href="{{ $reactionByUser->avatar!=NULL ? asset('uploads/users/' . $reactionByUser->user_id . '/' . $reactionByUser->avatar) : asset('uploads/userDefault.png') }}" data-lightbox="{{ $reactionByUser->created_at }}" data-title="{{ $reactionByUser->pseudo }}">
+									<img class="avatar" src="{{ $reactionByUser->avatar!=NULL ? asset('uploads/users/' . $reactionByUser->user_id . '/' . $reactionByUser->avatar) : asset('uploads/userDefault.png') }}" alt="Avatar utilisateur"/>
+								</a>
+								<span class="user-pseudo calligraf">{{ $reactionByUser->pseudo }}</span>
+								<span id="{{$i}}" class="user-note mask">{{ $reactionByUser->note }}</span>
+								<p>{!! lineBreak($reactionByUser->comment) !!}</p>
+								<p class="card-text">{{ fullDateFormat($reactionByUser->updated_at) }}</p>
 							</div>
-							<p class="card-text">{!! lineBreak($reactionByUser->comment) !!}</p>
-							<p>{{ fullDateFormat($reactionByUser->created_at) }}</p>
 							@auth    
 								@if ( Auth::user()->role == 1 )
 									<a class="button" href="{{ route('reactions.edit', $reactionByUser->id) }}">Modifier</a>
@@ -92,6 +108,9 @@
 						</div>
 					</div>
 				@endif
+				@php
+					$i++;	
+				@endphp
 			@endforeach
 		</div>
 	</section>

@@ -7,10 +7,23 @@
 
 		@auth
 			@if ( Auth::user()->role == 1 )
-				<a class="button" href="{{ route('ideas.create') }}">Créer</a>
-				@if(session()->has('info'))
-					<p>{{ session('info') }}</p>
+				@if(session()->has('info1') || session()->has('idea') || session()->has('info2'))
+					<div class="alert alert-success col-4 text-center" role="alert">
+						{{ session('info1') }}<a href="{{route('ideas.show', session('ideaId'))}}'" class="alert-link">{{ session('idea') }}</a>{{ session('info2') }}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
 				@endif
+				@if(session()->has('infoA') || session()->has('ideaTitle') || session()->has('infoB'))
+					<div class="alert alert-success col-4 text-center" role="alert">
+						{{ session('infoA') }}<strong>{{ session('ideaTitle') }}</strong>{{ session('infoB') }}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				@endif
+				<a class="button" href="{{ route('ideas.create') }}">Créer</a>
 			@endif
 		@endauth
 		
@@ -30,6 +43,17 @@
 						</a>
 						<h3>{{ $idea->title }}</h3>
 						<a class="button fas fa-eye fa-lg" href="{{ route('ideas.show', $idea->id) }}"></a>
+						@auth    
+						@if ( Auth::user()->role == 1 )
+							<a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier</a>
+							<button class="buttonDestroy button">Supprimer</button>
+							<form class="formDestroy mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+								@csrf
+								@method('DELETE')
+								<button class="button" type="submit">Confirmer</button>
+							</form>
+						@endif
+					@endauth
 					</div>
 				@endif
 			@endforeach

@@ -76,7 +76,7 @@
             <option value="No" @if( old('closured', $travel->closured) == 'No') selected @endif>Non</option>
             <option value="Yes" @if( old('closured', $travel->closured) == 'Yes') selected @endif>Oui</option>
         </select>
-        @error('cloured')
+        @error('closured')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

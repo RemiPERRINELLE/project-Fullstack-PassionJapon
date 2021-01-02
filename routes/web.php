@@ -42,3 +42,7 @@ Route::get('admin/dashboard', 'AdminController@dashboard')->name('dashboard');
 Route::put('admin/moderation/{user}', 'AdminController@banUpdate')->name('banUpdate');
 
 Route::resource('sales', 'SaleController');
+
+Route::view('games/index', 'games.index')->name('games');
+Route::view('games/shifumi', 'games.shifumi')->name('shifumi');
+Route::view('games/snake', 'games.snake')->name('snake');

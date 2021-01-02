@@ -29,9 +29,13 @@
                 <a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier l'article</a>
             @endif
         @endauth
+
         <h1>Passion <span class="title-japon">Japon</span><span class="title-point"></span></h1>
 
-        <img src="{{ asset('uploads/'.$idea->image)}}" alt="Photo du groupe"/>
+        <a href="{{ asset('uploads/'.$idea->image) }}" data-lightbox="{{ $idea->image }}" data-title="Equipe PassionJapon">
+            <img src="{{ asset('uploads/'.$idea->image) }}" alt="Photo du groupe"/>
+        </a>
+        
         <p>{!! lineBreak($idea->description) !!}</p>
     </section>
 
