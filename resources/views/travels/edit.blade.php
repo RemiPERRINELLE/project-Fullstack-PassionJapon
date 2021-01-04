@@ -70,7 +70,7 @@
 
         <!-- DATE CLOSURE -->
         <label for="date_closure" class="mt-4">Date de clôture :</label>
-        <input type="date" name="date_closure" class="datetimepicker form-control @error('date_closure') is-invalid @enderror" value="{{ old('date_closure', $travel->date_closure) }}" placeholder="Date de clôture">
+        <input type="text" name="date_closure" class="datetimepicker form-control @error('date_closure') is-invalid @enderror" value="{{ old('date_closure', $travel->date_closure) }}" placeholder="Date de clôture">
         @error('date_closure')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
