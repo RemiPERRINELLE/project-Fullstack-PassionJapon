@@ -110,7 +110,7 @@
     <footer>
         <a id="footerUp" class="fas fa-chevron-up" href="#menu"></a>
         <h3>© Rémi PERRINELLE - 2020 - Passion <span class="title-japon">Japon</span><span class="title-point"></span></h3>
-        <p>Contact : <a href="mailto:passion.japon-0928f2@inbox.mailtrap.io" title="Contactez-nous">passion.japon-0928f2@inbox.mailtrap.io</a></p>
+        <p>Contact : <a href="mailto:passion.japon1@gmail.com" title="Contactez-nous">passion.japon1@gmail.com</a></p>
     </footer>
     
 
