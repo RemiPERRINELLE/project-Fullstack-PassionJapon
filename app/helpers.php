@@ -5,6 +5,7 @@
     function lineBreak($string)
     {
         $string = str_replace(array("\r\n", "\r", "\n"), "<br/>", $string);
+        $string = str_replace(array("  "), "&nbsp&nbsp", $string);
         return $string;
     }
 
