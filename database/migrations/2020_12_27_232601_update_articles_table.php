@@ -13,7 +13,7 @@ class UpdateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->text('introduction')->nullable()->change();
             $table->text('conclusion')->nullable()->change();
             $table->text('description')->nullable()->change();
@@ -27,7 +27,7 @@ class UpdateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->text('description')->nullable(false)->change();
         });
     }
