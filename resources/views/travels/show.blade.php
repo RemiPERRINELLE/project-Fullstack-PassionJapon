@@ -75,7 +75,7 @@
 							<strong>{{ $message }}</strong>
 						</span>
 					@enderror
-					<textarea class="form-control rounded-1 mb-4 mt-4  @error('comment') is-invalid @enderror" name="comment" rows="5" placeholder="Commentaire">{{ old('comment') }}</textarea>
+					<textarea class="form-control rounded-1 mb-4 mt-4  @error('comment') is-invalid @enderror" name="comment" rows="5" placeholder="Commentaire" max="500">{{ old('comment') }}</textarea>
 					@error('comment')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>

@@ -12,18 +12,23 @@
                 </div>
             @endif
             
-        <form class="text-center border border-light p-5" action="{{ route('media.store')}}" method="POST" enctype="multipart/form-data">
+        <form class="font-weight-bold border border-light p-5" action="{{ route('media.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            <h4 class="mb-4">Ajouter une image à la galerie</h4>
+            <h4 class="text-center font-weight-bold mb-4">Ajouter une image à la galerie</h4>
 
             <!-- IMAGE -->
-            <input type="file" name="image" accept="image/*" class="form-control mb-4">
+            <label for="image" class="mt-4">Image :</label>
+            <input type="file" name="image" accept="image/*" class="form-control mb-4" max="5000">
 
             @error('image')
-                <p>{{ $message }}</p>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
             @enderror
             @if(session()->has('image-error'))
-                <p>{{ session('image-error') }}</p>
+                <span class="invalid-feedback invalidMedia" role="alert">
+                    <strong>{{ session('image-error') }}</strong>
+                </span>
             @endif
 
             <button class="button" type="submit">Ajouter</button>

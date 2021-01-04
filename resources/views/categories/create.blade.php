@@ -2,12 +2,13 @@
 
 @section('content')
 
-    <form class="text-center border border-light p-5" action="{{ route('categories.store')}}" method="POST">
+    <form class="font-weight-bold border border-light p-5" action="{{ route('categories.store')}}" method="POST">
         @csrf
-        <p class="h4 mb-4">Créer une catégorie</p>
+        <h4 class="font-weight-bold text-center mb-4">Créer une catégorie</h4>
 
         <!-- TITLE -->
-        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Titre catégorie">
+        <label for="title">Image :</label>
+        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Titre catégorie" max="100">
         @error('title')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -15,7 +16,8 @@
         @enderror
 
         <!-- IMAGE -->
-        <input type="text" name="image" class="form-control mt-4 @error('image') is-invalid @enderror" value="{{ old('image') }}" placeholder="Image catégorie">
+        <label for="image" class="mt-4">Image :</label>
+        <input type="text" name="image" class="form-control mb-4 @error('image') is-invalid @enderror" value="{{ old('image') }}" placeholder="Image catégorie" max="100">
         @error('image')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -23,7 +25,7 @@
         @enderror
 
         <!-- Send button -->
-        <button class="button" type="submit">Créer</button>
+        <button class="button mb-4" type="submit">Créer</button>
 
         <a class="button" href="{{ route('travels.index') }}">Retour</a>
     </form>
