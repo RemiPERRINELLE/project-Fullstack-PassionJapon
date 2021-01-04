@@ -24,16 +24,16 @@ class Users extends FormRequest
     public function rules()
     {
         return [
-            'pseudo' => ['required', 'string', 'max:255'],
+            'pseudo' => ['required', 'string', 'max:30'],
             'avatar' => ['image', 'max:2000'],
-            'name' => ['required', 'string', 'max:255'],
-            'firstname' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:30'],
+            'firstname' => ['required', 'string', 'max:30'],
             'sexe' => ['required', 'string', 'max:2'],
-            'adress' => ['nullable', 'string'],
+            'adress' => ['nullable', 'string', 'max:100'],
             'postal_code' => ['required', 'integer'],
-            'city' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:20'],
+            'city' => ['required', 'string', 'max:100'],
+            'country' => ['required', 'string', 'max:100'],
+            'phone' => ['nullable', 'string'],
         ];
     }
 }

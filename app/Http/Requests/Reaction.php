@@ -24,7 +24,7 @@ class Reaction extends FormRequest
     public function rules()
     {
         return [
-            'note' => ['required', 'integer', 'min:0', 'max:5'],
+            'note' => ['required', 'integer', 'min:1', 'max:5'],
             'comment' => ['nullable', 'string', 'max:500'],
         ];
     }

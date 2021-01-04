@@ -24,7 +24,7 @@ class Sale extends FormRequest
     public function rules()
     {
         return [
-            'numberPlaces' => ['required', 'integer', 'min:0']
+            'numberPlaces' => ['required', 'integer', 'min:1']
         ];
     }
 }
