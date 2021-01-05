@@ -73,10 +73,12 @@
                 </div>
             </div>
         @else
-            <p>Vous n'avez pas accès à cette page.</p>
+            <p class="stop">&#x26A0;</p>
+            <p class="noAccess">Vous n'avez pas accès à cette page.</p>
         @endif
     @else
-        <p>Vous n'avez pas accès à cette page.</p>
+        <p class="stop">&#x26A0;</p>
+        <p class="noAccess">Vous n'avez pas accès à cette page.</p>
     @endauth
 @endsection
 

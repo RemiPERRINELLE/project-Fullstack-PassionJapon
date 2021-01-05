@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\{Ideas, Reaction, Media, User};
 use App\Http\Requests\Ideas as IdeasRequest;
+use Illuminate\Support\Facades\Auth;
 
 class IdeasController extends Controller
 {
@@ -51,9 +52,10 @@ class IdeasController extends Controller
      */
     public function show(Ideas $idea)
     {
+        $user = Auth::user();
         $reactionsByUsers = Reaction::select('reactions.id', 'note', 'comment', 'reactions.user_id', 'reactions.updated_at', 'ban', 'avatar', 'pseudo')->join('users', 'reactions.user_id', '=', 'users.id')->where('reactions.idea_id', $idea->id)->orderByDesc('reactions.created_at')->get();
         $idea->with('media')->get();
-        return view('ideas/show', compact('idea', 'reactionsByUsers'));
+        return view('ideas/show', compact('user','idea', 'reactionsByUsers'));
     }
 
     /**

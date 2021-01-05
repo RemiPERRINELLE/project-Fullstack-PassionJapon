@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\{Travel, Category, Reaction};
 use App\Http\Requests\Travel as TravelRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TravelController extends Controller
 {
@@ -52,9 +53,10 @@ class TravelController extends Controller
      */
     public function show(Travel $travel)
     {
+        $user = Auth::user();
         $category = $travel->category;
         $reactionsByUsers = Reaction::select('reactions.id', 'note', 'comment', 'reactions.user_id', 'reactions.updated_at', 'ban', 'avatar', 'pseudo')->where('reactions.travel_id', $travel->id)->join('users', 'reactions.user_id', '=', 'users.id')->orderByDesc('reactions.created_at')->get();
-        return view('travels/show', compact('travel', 'category', 'reactionsByUsers'));
+        return view('travels/show', compact('user','travel', 'category', 'reactionsByUsers'));
     }
 
     /**

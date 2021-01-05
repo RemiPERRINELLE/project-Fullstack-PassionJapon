@@ -179,10 +179,11 @@ class UserController extends Controller
      */
     public function comments()
     {
+        $user =  Auth::user();
         $reactions = Reaction::where('reactions.user_id', Auth::user()->id)->get();
         $ideas = Reaction::where('reactions.user_id', Auth::user()->id)->join('ideas', 'reactions.idea_id', '=', 'ideas.id')->get();
         $travels = Reaction::select('travels.id', 'date_start', 'title')->where('reactions.user_id', Auth::user()->id)->join('travels', 'reactions.travel_id', '=', 'travels.id')->join('categories', 'travels.category_id', '=', 'categories.id')->get();
-        return view('user/comments', compact('reactions', 'ideas', 'travels'));
+        return view('user/comments', compact('user','reactions', 'ideas', 'travels'));
     }
 
     /**
@@ -190,9 +191,10 @@ class UserController extends Controller
      */
     public function commands()
     {
+        $user =  Auth::user();
         $sales = Sale::where('sales.user_id', Auth::user()->id)->get();
         $travels = Sale::select('travels.id', 'title', 'price', 'date_start')->where('sales.user_id', Auth::user()->id)->join('travels', 'sales.travel_id', '=', 'travels.id')->join('categories', 'travels.category_id', '=', 'categories.id')->get();
-        return view('user/commands', compact('sales', 'travels'));
+        return view('user/commands', compact('user','sales', 'travels'));
     }
 
 }
