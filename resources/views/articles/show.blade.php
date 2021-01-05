@@ -9,7 +9,7 @@
         <p class="mb-4">{!! lineBreak($article->introduction) !!}</p>
         <p class="mb-4 mt-5">{!! lineBreak($article->description) !!}</p>
         @foreach($article->ideas as $idea)
-            <h3>{{ $idea->title }}</h3>
+            <h3 class="mt-5">{{ $idea->title }}</h3>
             <a href="{{ asset('uploads/'.$idea->image) }}" data-lightbox="Images secondaires" data-title="{{ $idea->title }}">
                 <img class="mb-4 ideaMedia" src="{{ asset('uploads/'.$idea->image) }}" alt="{{ $idea->image }}"/>
             </a>

@@ -14,8 +14,8 @@ class UpdateArticlesTable extends Migration
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->text('introduction')->nullable()->change();
-            $table->text('conclusion')->nullable()->change();
+            $table->text('introduction')->change();
+            $table->text('conclusion')->change();
             $table->text('description')->nullable()->change();
         });
     }
