@@ -54,8 +54,8 @@
                                 <p>{!! lineBreak($reaction->comment) !!}</p>
                                 <p class="card-text">{{ fullDateFormat($reaction->updated_at) }}</p>
                                 <a class="button" href="{{ route('reactions.edit', $reaction->id) }}">Modifier</a>
-                                <button class="buttonDestroy button">Supprimer</button>
-                                <form class="formDestroy mask" action="{{ route('reactions.destroy', $reaction->id) }}" method="POST">
+                                <button id="buttonDestroy{{$k}}" class="buttonDestroy button">Supprimer</button>
+                                <form id="formDestroy{{$k}}" class="mask d-inline-block" action="{{ route('reactions.destroy', $reaction->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="button" type="submit">Confirmer</button>

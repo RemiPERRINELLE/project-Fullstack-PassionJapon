@@ -35,6 +35,9 @@
 		</div> --}}
 
 		<div class="row">
+			@php
+				$i=1;
+			@endphp
 			@foreach($ideas as $idea)
 				@if( $idea->id != 1 )
 					<div class="col-lg-4 col-md-6">
@@ -46,12 +49,15 @@
 						@auth    
 						@if ( Auth::user()->role == 1 )
 							<a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier</a>
-							<button class="buttonDestroy button">Supprimer</button>
-							<form class="formDestroy mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+							<button id="buttonDestroy{{$i}}" class="buttonDestroy button">Supprimer</button>
+							<form id="formDestroy{{$i}}" class="mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
 								@csrf
 								@method('DELETE')
 								<button class="button" type="submit">Confirmer</button>
 							</form>
+							@php
+								$i++;
+							@endphp
 						@endif
 					@endauth
 					</div>

@@ -106,13 +106,13 @@
                                             @endforeach                                    
                                         @elseif( $reaction->travel_id )
                                             @php
-                                                $i=0;
+                                                $j=0;
                                             @endphp
                                             @foreach( $travels as $travel)
-                                                @if( $reaction->travel_id == $travel->travel_id && $i < 1 )
+                                                @if( $reaction->travel_id == $travel->travel_id && $j < 1 )
                                                     <p class="font-weight-bold">Voyage {{ $travel->title }} du {{ $travel->date_start }}</p>
                                                     @php
-                                                        $i++;
+                                                        $j++;
                                                     @endphp
                                                 @endif
                                             @endforeach
@@ -131,8 +131,8 @@
                                         <a class="button fas fa-eye fa-lg" href="{{ route('travels.show', $reaction->travel_id) }}"></a>
                                         @endif
                                         <a class="button" href="{{ route('reactions.edit', $reaction->id) }}">Modifier</a>
-                                        <button class="buttonDestroy button">Supprimer</button>
-                                        <form class="formDestroy mask" action="{{ route('reactions.destroy', $reaction->id) }}" method="POST">
+                                        <button id="buttonDestroy{{$k}}" class="buttonDestroy button">Supprimer</button>
+                                        <form id="formDestroy{{$k}}" class="mask d-inline-block" action="{{ route('reactions.destroy', $reaction->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="button" type="submit">Confirmer</button>

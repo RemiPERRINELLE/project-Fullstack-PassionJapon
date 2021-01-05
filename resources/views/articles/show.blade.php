@@ -19,8 +19,8 @@
         @auth    
             @if ( Auth::user()->role == 1 )
                 <a class="button" href="{{ route('articles.edit', $article->id) }}">Modifier</a>
-                <button class="buttonDestroy button">Supprimer</button>
-                <form class="formDestroy mask" action="{{ route('articles.destroy', $article->id) }}" method="POST">
+                <button id="buttonDestroy1" class="buttonDestroy button">Supprimer</button>
+                <form id="formDestroy1" class="mask" action="{{ route('articles.destroy', $article->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="button" type="submit">Confirmer</button>

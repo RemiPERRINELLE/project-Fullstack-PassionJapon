@@ -34,6 +34,9 @@
             @endif
         @endauth
 
+        @php
+            $i=1;
+        @endphp
         @foreach($articles as $article)
             <div class="articles">
                 <a href="{{ route('articles.show', $article->id) }}">
@@ -45,12 +48,15 @@
                 @auth    
                     @if ( Auth::user()->role == 1 )
                         <a class="button" href="{{ route('articles.edit', $article->id) }}">Modifier</a>
-                        <button class="buttonDestroy button">Supprimer</button>
-                        <form class="formDestroy mask" action="{{ route('articles.destroy', $article->id) }}" method="POST">
+                        <button id="buttonDestroy{{$i}}" class="buttonDestroy button">Supprimer</button>
+                        <form id="formDestroy{{$i}}" class="mask" action="{{ route('articles.destroy', $article->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="button" type="submit">Confirmer</button>
                         </form>
+                        @php
+                            $i++;
+                        @endphp
                     @endif
                 @endauth
             </div>

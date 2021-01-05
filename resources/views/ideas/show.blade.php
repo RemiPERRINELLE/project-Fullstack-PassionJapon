@@ -25,8 +25,8 @@
 			@auth    
 				@if ( Auth::user()->role == 1 )
 					<a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier</a>
-					<button class="buttonDestroy button">Supprimer</button>
-					<form class="formDestroy mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+					<button id="buttonDestroy1" class="buttonDestroy button">Supprimer</button>
+					<form id="formDestroy1" class="mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
 						@csrf
 						@method('DELETE')
 						<button class="button" type="submit">Confirmer</button>
@@ -92,6 +92,7 @@
 
 				@php
 					$i=1;
+					$j=2;
 				@endphp
 				@foreach($reactionsByUsers as $reactionByUser)
 					@if( $reactionByUser->ban == 0 )
@@ -109,12 +110,15 @@
 								@auth    
 									@if ( Auth::user()->role == 1 )
 										<a class="button" href="{{ route('reactions.edit', $reactionByUser->id) }}">Modifier</a>
-										<button class="buttonDestroy button">Supprimer</button>
-										<form class="formDestroy mask" action="{{ route('reactions.destroy', $reactionByUser->id) }}" method="POST">
+										<button id="buttonDestroy{{$j}}" class="buttonDestroy button">Supprimer</button>
+										<form id="formDestroy{{$j}}" class="mask d-inline-block" action="{{ route('reactions.destroy', $reactionByUser->id) }}" method="POST">
 											@csrf
 											@method('DELETE')
 											<button class="button" type="submit">Confirmer</button>
 										</form>
+										@php
+											$j++;
+										@endphp
 									@endif
 								@endauth
 							</div>

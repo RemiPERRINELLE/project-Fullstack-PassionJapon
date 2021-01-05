@@ -4,7 +4,8 @@ $(document).ready(function () {
 // =========================== BUTTON DESTROY ===========================
 
     $('.buttonDestroy').click( function() {
-      $('.formDestroy').removeClass('mask');
+      var destroyId = $(this).attr('id').substr(13) ;
+      $('#formDestroy' + destroyId).removeClass('mask');
     });
 
 

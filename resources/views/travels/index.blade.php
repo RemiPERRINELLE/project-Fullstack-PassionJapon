@@ -29,6 +29,9 @@
         @endauth
 
         <div class="row">
+            @php
+                $i=1;
+            @endphp
             @foreach($categories as $category)
                 <div class="col-md-6">
                     <div class="cat-bubble-container">
@@ -40,12 +43,15 @@
                         @if ( Auth::user()->role == 1 )
                             <a class="button" href="{{ route('categories.show', $category->id) }}">Voir</a>
                             <a class="button" href="{{ route('categories.edit', $category->id) }}">Modifier</a>
-                            <button class="buttonDestroy button">Supprimer</button>
-                            <form class="formDestroy mask" action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                            <button id="buttonDestroy{{$i}}" class="buttonDestroy button">Supprimer</button>
+                            <form id="formDestroy{{$i}}" class="mask" action="{{ route('categories.destroy', $category->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="button" type="submit">Confirmer</button>
                             </form>
+                            @php
+                                $i++;
+                            @endphp
                         @endif
                     @endauth
                 </div>

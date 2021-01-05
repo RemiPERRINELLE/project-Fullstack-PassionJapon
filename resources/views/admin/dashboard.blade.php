@@ -9,6 +9,9 @@
             <div class="ideasDashBoard">
                 <h2>Idées</h2>
                 <div class="row">
+                    @php
+                        $i=1;
+                    @endphp
                     @foreach($ideas as $idea)
                         @if( $idea->id != 1 )
                             <div class="col-xl-4 col-md-6">
@@ -18,13 +21,16 @@
                                 <h3>{{ $idea->title }}</h3>
                                 <a class="button fas fa-eye fa-lg" href="{{ route('ideas.show', $idea->id) }}"></a>
                                 <a class="button" href="{{ route('ideas.edit', $idea->id) }}">Modifier</a>
-                                <button class="buttonDestroy button">Supprimer</button>
-                                <form class="formDestroy mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+                                <button id="buttonDestroy{{$i}}" class="buttonDestroy button">Supprimer</button>
+                                <form id="formDestroy{{$i}}" class="mask" action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="button" type="submit">Confirmer</button>
                                 </form>
                             </div>
+                            @php
+                                $i++;
+                            @endphp
                         @endif
                     @endforeach
                 </div>
@@ -43,12 +49,16 @@
                             <h3>{{ $article->title }}</h3>
                             <a class="button fas fa-eye fa-lg" href="{{ route('articles.show', $article->id) }}"></a>
                             <a class="button" href="{{ route('articles.edit', $article->id) }}">Modifier</a>
-                            <form action="{{ route('articles.destroy', $article->id) }}" method="POST">
+                            <button id="buttonDestroy{{$i}}" class="buttonDestroy button">Supprimer</button>
+                            <form id="formDestroy{{$i}}" class="mask" action="{{ route('articles.destroy', $article->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="button" type="submit">Supprimer</button>
+                                <button class="button" type="submit">Confirmer</button>
                             </form>
                         </div>
+                        @php
+                            $i++;
+                        @endphp
                     @endforeach
                 </div>
             </div>
