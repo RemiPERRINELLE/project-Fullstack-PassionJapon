@@ -192,7 +192,7 @@ class UserController extends Controller
     public function commands()
     {
         $user =  Auth::user();
-        $sales = Sale::where('sales.user_id', Auth::user()->id)->get();
+        $sales = Sale::where('sales.user_id', Auth::user()->id)->orderByDesc('sales.created_at')->get();
         $travels = Sale::select('travels.id', 'title', 'price', 'date_start')->where('sales.user_id', Auth::user()->id)->join('travels', 'sales.travel_id', '=', 'travels.id')->join('categories', 'travels.category_id', '=', 'categories.id')->get();
         return view('user/commands', compact('user','sales', 'travels'));
     }
