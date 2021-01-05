@@ -3,7 +3,7 @@
 @section('content')
 
     @auth
-        @if( Auth::user()->id == $user->id )
+        @if( Auth::user()->id == $user->id && $user->role == 0 )
 
             <section class="comments">
                 <div class="card main-card">

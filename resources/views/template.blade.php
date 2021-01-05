@@ -75,8 +75,11 @@
                                 @endif
                                 
                                 <a class="dropdown-item" href="{{ route('profile') }}">Profil</a>
-                                <a class="dropdown-item" href="{{ route('comments') }}">Commentaires</a>
-                                <a class="dropdown-item" href="{{ route('commands') }}">Commandes</a>
+
+                                @if ( Auth::user()->role == 0 )
+                                    <a class="dropdown-item" href="{{ route('comments') }}">Commentaires</a>
+                                    <a class="dropdown-item" href="{{ route('commands') }}">Commandes</a>
+                                @endif
                                 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
