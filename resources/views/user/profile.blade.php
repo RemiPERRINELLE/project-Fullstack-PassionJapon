@@ -19,16 +19,16 @@
                     @endif
 
                     <div class="row mr-2 ml-2">
-                        <div class="col-4">
+                        <div class="col-12 col-md-4">
                                 <img class="avatarShow profileAvatar" src="{{ $user->avatar!=NULL ? asset('uploads/users/' . $user->id . '/' . $user->avatar) : asset('uploads/userDefault.png') }}" alt="Avatar utilisateur"/>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6 col-md-4">
                             <p>Pseudo : <span class="calligraf">{{ $user->pseudo }}</span></p>
                             <p class="userEmail">Mail : <span>{{ $user->email }}</span></p>
                             <p>Nom : <span class="calligraf">{{ $user->name }}</span></p>
                             <p>Prénom : <span class="calligraf">{{ $user->firstname }}</span></p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6 col-md-4">
                             @if( $user->sexe == 'H')
                                 <p>Sexe : <span class="calligraf">Homme</span></p>
                             @else
@@ -40,7 +40,7 @@
                                 <p>Adresse : <span class="calligraf">{{ $user->city }} - {{ $user->postal_code }}</span></p>
                             @endif
                             <p>Pays : <span class="calligraf">{{ $user->country }}</span></p>
-                            <p>Téléphone : <span class="calligraf">@if($user->phone != null) 0{{ $user->phone }}</span>@endif</p>
+                            <p>Téléphone : <span class="calligraf">@if($user->phone != null) 0{{ $user->phone }}@endif</span></p>
                         </div>
                     </div>
 
@@ -61,10 +61,10 @@
                     <p>Pays : <span class="calligraf">{{ $user->country }}</span></p>
                     <p>Téléphone : <span class="calligraf">@if($user->phone != null) 0{{ $user->phone }}@endif</span></p>     --}}
                     <div class="row mr-2 ml-2">
-                        <div class="col-4">
-                            <a style="display: block;" class="button buttonCenter" href="{{ route('edit.password', $user->id) }}">Modifier le mot de passe</a>
+                        <div class="col-6 col-md-4">
+                            <a style="display: block;" class="button buttonCenter d-block" href="{{ route('edit.password', $user->id) }}">Modifier le mot de passe</a>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6 col-md-2">
                             <a class="button buttonCenter d-block" href="{{ route('users.edit', $user->id) }}">Modifier les informations</a>
                         </div>
                     </div>
