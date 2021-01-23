@@ -2,9 +2,7 @@
 
 @section('content')
 
-	@if( $idea->id == 1 )
-
-	@else
+	@if( $idea->id != 1 )
 
 		<section class="idea">
 			<a href="{{ asset('uploads/'.$idea->image) }}" data-lightbox="{{ $idea->image }}" data-title="{{ $idea->title }}">
@@ -88,7 +86,7 @@
 					<a class="button" href="{{ route('register') }}">S'inscrire</a>
 				@endauth
 
-				{{-- boucle récupérer les commentaires --}}
+				<!-- Boucle récupérer les commentaires -->
 
 				@php
 					$i=1;

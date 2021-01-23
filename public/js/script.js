@@ -242,7 +242,7 @@ $(document).ready(function () {
 
 // =========================== SHIFUMI ===========================
 
-    if( window.location.href == 'http://127.0.0.1:8000/games/shifumi' ){
+    if( window.location.href == 'http://127.0.0.1:8000/games/shifumi' || window.location.href == 'http://remiperrinelle.com/portfolio/project-Fullstack-passionjapon/public/index.php/games/shifumi' ){
 
         // ========== VARIABLES ==========
         let btnStone = document.getElementsByClassName('shifumiImg')[0];
@@ -353,6 +353,9 @@ $(document).ready(function () {
         }
 
     }
+
+
+
 
 // =========================== SNAKE ===========================
 

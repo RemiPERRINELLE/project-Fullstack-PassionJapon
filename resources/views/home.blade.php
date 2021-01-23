@@ -35,6 +35,8 @@
         <a href="{{ asset('uploads/'.$idea->image) }}" data-lightbox="{{ $idea->image }}" data-title="Equipe PassionJapon">
             <img src="{{ asset('uploads/'.$idea->image) }}" alt="Photo du groupe"/>
         </a>
+
+        <h3 class="mt-3 mb-5">Présentation du projet :</h3>
         
         <p>{!! lineBreak($idea->description) !!}</p>
     </section>

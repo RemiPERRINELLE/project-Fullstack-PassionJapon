@@ -55,7 +55,7 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="checkbox" value="1" name="myonoffswitch{{ $user->id }}" class="onoffswitch-checkbox" id="myonoffswitch{{ $user->id }}" tabindex="0" @if($user->ban == 1) checked @endif>
-                                                    <label class="onoffswitch-label" for="myonoffswitch{{ $user->id }}">
+                                                    <label class="onoffswitch-label text-left" for="myonoffswitch{{ $user->id }}">
                                                         <span class="onoffswitch-inner"></span>
                                                         <span class="onoffswitch-switch"></span>
                                                     </label>

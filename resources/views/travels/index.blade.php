@@ -33,7 +33,7 @@
                 $i=1;
             @endphp
             @foreach($categories as $category)
-                <div class="col-md-6">
+                <div class="col-lg-6">
                     <div class="cat-bubble-container">
                         {{-- <a class="cat-bubble" href="{{ route('categories.show', $category->id) }}"><img src="{{ asset('uploads/'.$category->image) }}" alt="{{ $category->image }}"/><span>{{ $category->title }}</span></a> --}}
                         <a href="{{ route('categories.show', $category->id) }}"><img src="{{ asset('uploads/'.$category->image) }}" alt="{{ $category->image }}"/></a>

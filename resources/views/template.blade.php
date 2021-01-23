@@ -38,13 +38,16 @@
 </head>
 <body>
 
+    <div id="menu"></div>
+    
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-md sticky-top">
         <a class="navbar-brand" href="{{ route('home') }}"><span>JAPAN</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
             <div class="animated-icon"><span></span><span></span><span></span></div>
         </button>
-        <div id="navbarBlock1" class="collapse navbar-collapse justify-content-end" id="myNavbar">
+        {{-- <div id="navbarBlock1" class="collapse navbar-collapse justify-content-end" id="myNavbar"> --}}
+        <div class="collapse navbar-collapse justify-content-end" id="myNavbar">
             <ul class="nav nav-pills navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('ideas.index') }}">Idées</a></li>

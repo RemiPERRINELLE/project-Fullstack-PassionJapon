@@ -77,7 +77,7 @@
                                     <a href="{{ route('categories.show', $category->id) }}"><img src="{{ asset('uploads/'.$category->image) }}" alt="{{ $category->image }}"/></a>
                                     <a class="cat-bubble" href="{{ route('categories.show', $category->id) }}">{{ $category->title }}</a>
                                 </div>
-                                @php
+                                {{-- @php
                                     $travelsCat = App\Travel::where('travels.category_id', $category->id)->get();
                                 @endphp
                                 @foreach( $travelsCat as $travelCat )
@@ -96,7 +96,7 @@
                                         }
                                     @endphp
                                     <p class="travelDashBoardInfo">Du {{ dateFormat($travelCat->date_start) }} au {{ dateFormat($travelCat->date_end) }} - Note moyenne : {{ $averageNote }} ({{ $nbNotes }})</p>
-                                @endforeach
+                                @endforeach --}}
                             </div>
                     @endforeach
                 </div>
